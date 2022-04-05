@@ -3,31 +3,41 @@ NAME		=	cub3d
 CC			=	gcc
 FLAGS		=	# -Wall -Wextra -Werror
 MLXFLAGS	=	-lmlx_Linux -lXext -lX11
-RM			=	rm -f
-INCLUDE		=	cub3d.h
+RM			=	rm -fr
+OBJECT_DIR	=	./objects/
+MAKE_DIR	=	mkdir -p
+INCLUDES	=	./includes
 PATH_LIBVEC	=	./vectors
-
+LIBFT = libft/libft.a
+LIBFT_DIR = ./libft
 SRC_FILES =	main.c \
 			init.c \
-			run.c
+			run.c \
+			get_map_struct.c \
+			get_next_line.c
 
+SRC_DIR	=	./src/
+SRC		=	$(addprefix $(SRC_DIR), main.c init.c run.c)
 
-SRC =	$(SRC_FILES)
-
-OBJECTS = $(SRC:.c=.o)
-
-.c.o:
-		$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
+OBJECTS = $(patsubst $(SRC_DIR)%.c, $(OBJECT_DIR)%.o, $(SRC))
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) $(INCLUDE)
-		make -C $(PATH_LIBVEC)
-		$(CC) $(FLAGS) $(OBJECTS) -o $(NAME) $(MLXFLAGS) -lm -L$(PATH_LIBVEC) -lvec
+$(NAME): $(OBJECTS) $(LIBFT)
+		@make --no-print-directory -C $(PATH_LIBVEC)
+		$(CC) $(FLAGS) -I $(INCLUDES) $(OBJECTS) $(LIBFT) -o $(NAME) $(MLXFLAGS) -lm -L$(PATH_LIBVEC) -lvec
+
+$(OBJECT_DIR)%.o:	$(SRC_DIR)%.c
+		$(MAKE_DIR) $(OBJECT_DIR)
+		$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@
+
+$(LIBFT):
+		$(MAKE) -C $(LIBFT_DIR)
 
 clean:
-	$(RM) $(OBJECTS)
-	make -C $(PATH_LIBVEC) clean
+	$(RM) $(OBJECT_DIR)
+	$(MAKE) -C $(PATH_LIBVEC) clean
+	$(MAKE) fclean -C $(LIBFT_DIR)
 
 fclean: clean
 	$(RM) $(NAME)

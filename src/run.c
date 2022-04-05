@@ -1,4 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   run.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/04 11:05:59 by dalves-s          #+#    #+#             */
+/*   Updated: 2022/04/05 09:08:16 by dalves-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <cub3d.h>
 
 void    change_direction(t_game *game, float rot_speed)
 {
@@ -164,8 +176,8 @@ int	render(t_game *game)
 	t_rays	rays;
 
 	draw_background(game);
-	change_direction(game, -0.01);
-	change_plane(game, -0.01);
+	change_direction(game, -0.05);
+	change_plane(game, -0.05);
 	for (int pixel = 0; pixel < WIDTH; pixel ++)
 	{
 		cameraPixel = game->player.plane;
