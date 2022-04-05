@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 11:05:59 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/05 09:08:16 by dalves-s         ###   ########.fr       */
+/*   Created: 2022/04/05 10:14:48 by paugusto          #+#    #+#             */
+/*   Updated: 2022/04/05 10:22:32 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void    change_direction(t_game *game, float rot_speed)
 
 void    change_plane(t_game *game, float rot_speed)
 {
-    double    old_plane_x;
+	double	old_plane_x;
 
-    old_plane_x = game->player.plane.x;
-    game->player.plane.x = game->player.plane.x * cos(rot_speed) - \
-    game->player.plane.y * sin(rot_speed);
-    game->player.plane.y = old_plane_x * sin(rot_speed) + \
-    game->player.plane.y * cos(rot_speed);
+	old_plane_x = game->player.plane.x;
+	game->player.plane.x = game->player.plane.x * cos(rot_speed) - \
+	game->player.plane.y * sin(rot_speed);
+	game->player.plane.y = old_plane_x * sin(rot_speed) + \
+	game->player.plane.y * cos(rot_speed);
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -168,6 +168,72 @@ void	draw_background(t_game *game)
 	}
 }
 
+void	player_rotate(t_game *game) //rotação do jogador
+{
+	float rot_speed;
+
+	if (game->buttons.rotate_right)
+		rot_speed = 0.1f;
+	else if (game->buttons.rotate_left)
+		rot_speed = -0.1f;
+	else
+		rot_speed = 0;
+	if (game->buttons.rotate_right && game->buttons.rotate_left)
+		rot_speed = 0;
+	if (rot_speed)
+	{
+		change_direction(game, rot_speed);
+		change_plane(game, rot_speed);
+	}
+}
+
+void	player_walk_up_down(t_game *game)
+{
+
+	t_vec velocity;
+	int		speed = 5;
+
+	velocity = game->player.dir;
+	if (game->buttons.up)
+		vec_scale(&velocity, 0.1f);
+	else if (game->buttons.down)
+		vec_scale(&velocity, -0.1f);
+	else
+		vec_scale(&velocity, 0); //parou
+	if (game->map[(int)game->player.pos.y]\
+	[(int)(game->player.pos.x + velocity.x * 5)] == 0)
+		game->player.pos.x += velocity.x;
+	if (game->map[(int)(game->player.pos.y + velocity.y * 5)]\
+	[(int)game->player.pos.x] == 0)
+		game->player.pos.y += velocity.y;
+}
+
+void	player_walk_left_right(t_game *game) //strafe
+{
+
+	t_vec strafe_velocity;
+	double oldDirX;
+
+	strafe_velocity = game->player.dir;
+	oldDirX = strafe_velocity.x;
+	strafe_velocity.x = strafe_velocity.x * cos(PI / 2) - \
+	strafe_velocity.y * sin(PI / 2); //rotaciona 90 graus,
+	strafe_velocity.y = oldDirX * sin(PI / 2) + strafe_velocity.y * \
+	cos(PI / 2);//rotaciona negativamente para a esquerda
+	if (game->buttons.right)
+		vec_scale(&strafe_velocity, 0.1f);
+	else if (game->buttons.left)
+		vec_scale(&strafe_velocity, -0.1f);
+	else
+		vec_scale(&strafe_velocity, 0);
+	if (game->map[(int)game->player.pos.y]\
+	[(int)(game->player.pos.x + strafe_velocity.x * 5)] == 0)
+		game->player.pos.x += strafe_velocity.x;
+	if (game->map[(int)(game->player.pos.y + strafe_velocity.y * 5)]\
+	[(int)game->player.pos.x] == 0)
+		game->player.pos.y += strafe_velocity.y;
+}
+
 int	render(t_game *game)
 {
 	float	multiplier;
@@ -176,8 +242,9 @@ int	render(t_game *game)
 	t_rays	rays;
 
 	draw_background(game);
-	change_direction(game, -0.05);
-	change_plane(game, -0.05);
+	player_rotate(game);
+	player_walk_up_down(game);
+	player_walk_left_right(game);
 	for (int pixel = 0; pixel < WIDTH; pixel ++)
 	{
 		cameraPixel = game->player.plane;
@@ -195,8 +262,51 @@ int	render(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->win, game->canvas.img, 0, 0);
 }
 
+
+int	press_key(int key_code, t_game *game)
+{
+	if (key_code == 'w')
+		game->buttons.up = 1;
+	if (key_code == 'a')
+		game->buttons.left = 1;
+	if (key_code == 's')
+		game->buttons.down = 1;
+	if (key_code == 'd')
+		game->buttons.right = 1;
+	if (key_code == ' ')
+		game->buttons.function = 1;
+	if (key_code == ESC)
+		game->buttons.exit = 1;
+	if (key_code == 65363)//seta direita
+		game->buttons.rotate_right = 1;
+	if (key_code == 65361)//seta esquerda
+		game->buttons.rotate_left = 1;
+}
+
+int	release_key(int key_code, t_game *game)
+{
+	if (key_code == 'w')
+		game->buttons.up = 0;
+	if (key_code == 'a')
+		game->buttons.left = 0;
+	if (key_code == 's')
+		game->buttons.down = 0;
+	if (key_code == 'd')
+		game->buttons.right = 0;
+	if (key_code == ' ')
+		game->buttons.function = 0;
+	if (key_code == ESC)
+		game->buttons.exit = 0;
+	if (key_code == 65363)//seta direita
+		game->buttons.rotate_right = 0;
+	if (key_code == 65361)//seta esquerda
+		game->buttons.rotate_left = 0;
+}
+
 void	run(t_game *game)
 {
 	mlx_loop_hook(game->mlx, &render, game);
+	mlx_hook(game->win, KeyPress, KeyPressMask, press_key, game);
+	mlx_hook(game->win, KeyRelease, KeyReleaseMask, release_key, game);
 	mlx_loop(game->mlx);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/05 10:00:21 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/05 10:19:31 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,14 @@
 # include <stdio.h>
 # include <math.h>
 
-# define WIDTH 1200
-# define HEIGHT 700
+# define WIDTH			1200
+# define HEIGHT			700
+# define KeyPress		2
+# define KeyRelease		3
+# define KeyPressMask	(1L<<0)
+# define KeyReleaseMask	(1L<<1)
+# define ESC 			0xff1b
+# define PI 			3.141592653589f
 
 typedef struct	s_data {
 	void	*img;
@@ -36,6 +42,18 @@ typedef struct s_draw{
 	int start_line;
 	int end_line;
 } t_draw;
+
+typedef struct s_buttons
+{
+	int	up;
+	int	down;
+	int	left;
+	int	right;
+	int	exit;
+	int	rotate_right;
+	int	rotate_left;
+	int	function;
+}	t_buttons;
 
 typedef struct s_rays{
 	t_int_vec	map_pos;
@@ -58,6 +76,7 @@ typedef struct	s_player {
 
 typedef struct s_game{
 	t_player	player;
+	t_buttons	buttons;
 	char		*no;
 	char		*so;
 	char		*we;
