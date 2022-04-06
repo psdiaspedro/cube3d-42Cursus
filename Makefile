@@ -13,11 +13,15 @@ LIBFT_DIR = ./libft
 SRC_FILES =	main.c \
 			init.c \
 			run.c \
-			get_map_struct.c \
-			get_next_line.c
+			player_movement.c \
+			vectors.c \
+			draw.c \
+			raycasting.c \
+			hooks.c \
+			render.c
 
 SRC_DIR	=	./src/
-SRC		=	$(addprefix $(SRC_DIR), main.c init.c run.c)
+SRC		=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 
 OBJECTS = $(patsubst $(SRC_DIR)%.c, $(OBJECT_DIR)%.o, $(SRC))
 

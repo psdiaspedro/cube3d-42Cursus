@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/05 10:19:31 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/06 12:06:00 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@
 # include <stdio.h>
 # include <math.h>
 
-# define WIDTH			1200
-# define HEIGHT			700
-# define KeyPress		2
-# define KeyRelease		3
-# define KeyPressMask	(1L<<0)
-# define KeyReleaseMask	(1L<<1)
-# define ESC 			0xff1b
-# define PI 			3.141592653589f
+# define KEY_PRESS_MASK		(1L<<0)
+# define KEY_RELEASE_MASK	(1L<<1)
+# define RIGHT_ARROW		65363
+# define LEFT_ARROW			65361
+# define KEY_RELEASE		3
+# define KEY_PRESS			2
+# define WIDTH				1200
+# define HEIGHT				700
+# define ESC 				0xff1b
+# define PI 				3.141592653589f
 
 typedef struct	s_data {
 	void	*img;
@@ -91,5 +93,41 @@ void	init_game(t_game *game);
 void	init_images(t_game *game);
 void	run(t_game *game);
 void	init_player(t_game *game);
+
+//player player_movement
+void	change_direction(t_game *game, float rot_speed);
+void	change_plane(t_game *game, float rot_speed);
+void	player_rotate(t_game *game);
+void	player_walk_left_right(t_game *game);
+void	player_walk_up_down(t_game *game);
+
+//vectors
+float	mag_vec(t_vec *v);
+t_vec	sum_vec(t_vec v1, t_vec v2);
+
+//draw pixel
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		get_pixel(t_data *data, int x, int y);
+void	draw_background(t_game *game);
+void	get_wall_size(t_game *game, t_rays *rays, int pixel);
+
+//raycasting algorithm
+void	calc_delta(t_game *game, t_vec *rayDir, t_rays *rays);
+void	calc_dist(t_game *game, t_vec *rayDir, t_rays *rays);
+void	dda(t_game *game, t_rays *rays);
+void	perpendicular_dist(t_game *game, t_vec *rayDir, t_rays *rays);
+void	raycasting(t_game *game, t_rays *rays, int pixel);
+
+//hooks
+int	press_key(int key_code, t_game *game);
+int	release_key(int key_code, t_game *game);
+
+//render
+int	render(t_game *game);
+
+//update
+void	update_frame(t_game *game);
+
+
 
 #endif
