@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:06:03 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/05 10:15:18 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/07 13:47:21 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ void	init_game(t_game *game)
 void	init_images(t_game *game)
 {
 	game->canvas.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->canvas.addr = mlx_get_data_addr(game->canvas.img, &game->canvas.bits_per_pixel, &game->canvas.line_length, &game->canvas.endian);
+	game->canvas.addr = mlx_get_data_addr(\
+	game->canvas.img, &game->canvas.bits_per_pixel, \
+	&game->canvas.line_length, &game->canvas.endian);
 }

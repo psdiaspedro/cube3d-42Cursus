@@ -1,12 +1,12 @@
-//* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 14:02:02 by paugusto          #+#    #+#             */
-/*   Updated: 2022/04/05 14:08:40 by paugusto         ###   ########.fr       */
+/*   Created: 2022/04/07 13:49:32 by paugusto          #+#    #+#             */
+/*   Updated: 2022/04/07 13:49:54 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	calc_delta(t_game *game, t_vec *ray_dir, t_rays *rays)
 {
 	rays->delta_x = 10000000;
-    if (ray_dir->x != 0)
-        rays->delta_x = fabs(1 / ray_dir->x);
-    rays->delta_y = 10000000;
-    if (ray_dir->y != 0)
-        rays->delta_y = fabs(1 / ray_dir->y);
+	if (ray_dir->x != 0)
+		rays->delta_x = fabs(1 / ray_dir->x);
+	rays->delta_y = 10000000;
+	if (ray_dir->y != 0)
+		rays->delta_y = fabs(1 / ray_dir->y);
 	rays->map_pos.x = (int)floor(game->player.pos.x);
 	rays->map_pos.y = (int)floor(game->player.pos.y);
 }
@@ -33,7 +33,8 @@ void	calc_dist(t_game *game, t_vec *ray_dir, t_rays *rays)
 	}
 	else
 	{
-		rays->dist_x = (rays->map_pos.x + 1 - game->player.pos.x) * rays->delta_x;
+		rays->dist_x = (rays->map_pos.x + 1 - game->player.pos.x) \
+		* rays->delta_x;
 		rays->step_x = 1;
 	}
 	if (ray_dir->y < 0)
@@ -44,13 +45,13 @@ void	calc_dist(t_game *game, t_vec *ray_dir, t_rays *rays)
 	else
 	{
 		rays->step_y = 1;
-		rays->dist_y = (rays->map_pos.y + 1 - game->player.pos.y) * rays->delta_y;
+		rays->dist_y = (rays->map_pos.y + 1 - game->player.pos.y) \
+		* rays->delta_y;
 	}
 }
 
 void	dda(t_game *game, t_rays *rays)
 {
-
 	while (game->map[rays->map_pos.y][rays->map_pos.x] == 0)
 	{
 		if (rays->dist_x < rays->dist_y)
@@ -71,9 +72,11 @@ void	dda(t_game *game, t_rays *rays)
 void	perpendicular_dist(t_game *game, t_vec *ray_dir, t_rays *rays)
 {
 	if (rays->hit_side == 0)
-		rays->perpendicular_dist = (fabs(rays->map_pos.x - game->player.pos.x + ((1 - rays->step_x) / 2)) / ray_dir->x);
+		rays->perpendicular_dist = (fabs(rays->map_pos.x - game->player.pos.x \
+		+ ((1 - rays->step_x) / 2)) / ray_dir->x);
 	else
-		rays->perpendicular_dist = (fabs(rays->map_pos.y - game->player.pos.y + ((1 - rays->step_y) / 2)) / ray_dir->y);
+		rays->perpendicular_dist = (fabs(rays->map_pos.y - game->player.pos.y \
+		+ ((1 - rays->step_y) / 2)) / ray_dir->y);
 }
 
 void	raycasting(t_game *game, t_rays *rays, int pixel)
