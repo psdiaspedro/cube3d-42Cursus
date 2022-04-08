@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 11:05:54 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/08 11:41:00 by dalves-s         ###   ########.fr       */
+/*   Created: 2022/04/07 11:23:35 by dalves-s          #+#    #+#             */
+/*   Updated: 2022/04/07 11:25:51 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-
-int	main(int argc, char **argv)
+void	free_all(t_game *game)
 {
-	t_game	game;
+	int x;
 
-	if (argc > 2 || argc < 2)
+	x = 0;
+	while (game->map)
 	{
-		ft_putendl_fd("ERROR:\nWrong number of arguments!:/", 2);
-		return (1);
+		free(game->map[x]);
+		x++;
 	}
-	init_map(&game);
-	get_map_struct(argv, &game);
-	t_vec	cameraPixel;
-
-	init_game(&game);
-	init_images(&game);
-	init_player(&game);
-	run(&game);
-	free_all(&game);
-	return (0);
+	free(game->no);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/05 10:19:31 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/08 09:09:57 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 # include <X11/X.h>
 # include "../vectors/vec.h"
 # include <stdio.h>
+# include <libft.h>
 # include <math.h>
+# include <fcntl.h>
 
 # define WIDTH			1200
 # define HEIGHT			700
@@ -81,15 +83,22 @@ typedef struct s_game{
 	char		*so;
 	char		*we;
 	char		*ea;
+	char		*ceil_color;
+	char		*floor_color;
 	void		*mlx;
+	int			fd;
 	void		*win;
+	char		**map;
+	char		**backup;
 	t_data		canvas;
-	int			map[10][10];
 }	t_game;
 
+void	init_map(t_game *game);
 void	init_game(t_game *game);
 void	init_images(t_game *game);
 void	run(t_game *game);
 void	init_player(t_game *game);
+void	get_map_struct(char **argv, t_game *game);
+void	free_all(t_game *game);
 
 #endif

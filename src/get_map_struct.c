@@ -6,60 +6,12 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 18:03:28 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/05 09:56:16 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/08 12:13:28 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h" 
-
-void	check_map_wall(t_maze *maze)
-{
-	int	i;
-
-	i = 0;
-	while (maze->lines[0][i] != '\0' && maze->lines[maze->m_height - 1][i] != '\0')
-	{
-		if (maze->lines[0][i] != '1' || maze->lines[maze->m_height - 1][i] != '1')
-		{
-			ft_putstr_fd("ERROR\nMap must be surrounded by wall\n", 1);
-			exit (1);
-		}
-		i++;
-	}
-	i = 0;
-	while (i < maze->m_height)
-	{
-		if (maze->lines[i][0] != '1' || maze->lines[i][maze->m_width - 1] != '1')
-		{
-			ft_putstr_fd("ERROR\nMap must be surrounded by wall\n", 1);
-			exit (1);
-		}
-		i++;
-	}
-}
-
-// void	count_map_pce(t_maze *maze)
-// {
-// 	size_t	j;
-// 	size_t	i;
-
-// 	j = 0;
-// 	while (maze->lines[j] != NULL)
-// 	{
-// 		i = 0;
-// 		while (maze->lines[j][i] != '\0')
-// 		{
-// 			if (maze->lines[j][i] == 'P')
-// 				maze->check_p++;
-// 			if (maze->lines[j][i] == 'C')
-// 				maze->check_c++;
-// 			if (maze->lines[j][i] == 'E')
-// 				maze->check_e++;
-// 			i++;
-// 		}
-// 		j++;
-// 	}
-// }
+#include <cub3d.h>
+#include "get_next_line.h"
 
 // void	check_error_pce(t_maze *maze)
 // {
@@ -75,46 +27,109 @@ void	check_map_wall(t_maze *maze)
 // 	}
 // }
 
-void	check_map_content(char *line)
-{
-	int	column;
+// void	check_map_content(char *line)
+// {
+// 	int	column;
 
-	column = 0;
-	while (line[column])
+// 	column = 0;
+// 	while (line[column])
+// 	{
+// 		if (line[column] != 'N' && line[column] != 'S'
+// 			&& line[column] != 'E' && line[column] != 'W'
+// 			&& line[column] != '1' && line[column] != '0')
+// 		{
+// 			ft_putstr_fd("ERROR\nIs there any wrong character on the maze \n", 1);
+// 			exit (1);
+// 		}
+// 		column++;
+// 	}
+// }
+
+char	**fix_line(char *aux)
+{
+	char	*temp;
+	char	**lines;
+	int		i;
+
+	i = 2;
+	temp = ft_strtrim(aux," ");
+	lines = ft_split(temp, ' ');
+	while (lines[i] != NULL)
 	{
-		if (line[column] != 'N' && line[column] != 'S'
-			&& line[column] != 'E' && line[column] != 'W'
-			&& line[column] != '1' && line[column] != '0')
-		{
-			ft_putstr_fd("ERROR\nIs there any wrong character on the maze \n", 1);
-			exit (1);
-		}
-		column++;
+			lines[1] = ft_strjoin(lines[1], lines[i]);
+		i++;
 	}
+	return (lines);
 }
 
-void	get_map_struct(char **argv, t)
+// void	get_path(t_game *game)
+// {
+	
+// }
+
+void	get_map_struct(char **argv, t_game *game)
 {
 	const char	*address;
+	char		*aux;
+	char		**mat;
 	int			line;
 	size_t		gnl_output;
+	int			numb_lines;
 
 	address = argv[1];
 	line = 0;
-	maze->fd = open(address, O_RDONLY);
+	game->fd = open(address, O_RDONLY);
 	gnl_output = 1;
-	while (gnl_output != 0)
+	numb_lines = 0;
+	while (gnl_output)
 	{
-		gnl_output = get_next_line(maze->fd, &maze->lines[line]);
-		maze->backup[line] = ft_strdup(maze->lines[line]);
-		check_map_content(maze->lines[line]);
-		maze->m_height++;
-		printf("%s\n", maze->lines[line]);
-		line++;
+		gnl_output = get_next_line(game->fd, &aux);
+		if (aux[0] == '\0')
+			continue ;
+		if (numb_lines < 6)
+		{
+			mat = fix_line(aux);
+			numb_lines++;
+			// get_path(&game);
+		}
+		if (mat[0][0] == 'N')
+		{
+			game->no = ft_strdup(mat[1]);
+			printf("N %s\n", game->no);
+		}
+		else if (mat[0][0] == 'S')
+		{
+			game->so = ft_strdup(mat[1]);
+			printf("S %s\n", game->so);
+		}
+		else if (mat[0][0] == 'E')
+		{
+			game->ea = ft_strdup(mat[1]);
+			printf("E %s\n", game->ea);
+		}
+		else if (mat[0][0] == 'W')
+		{
+			game->we = ft_strdup(mat[1]);
+			printf("W %s\n", game->we);
+		}
+		else if (mat[0][0] == 'C')
+		{
+			game->ceil_color = ft_strdup(mat[1]);
+			printf("C %s\n", game->ceil_color);
+		}
+		else if (mat[0][0] == 'F')
+		{
+			game->floor_color = ft_strdup(mat[1]);
+			printf("F %s\n", game->floor_color);
+		}
+		else
+		{
+			game->map[line] = ft_strdup(aux);
+			printf("MAP %s\n", game->map[line]);
+			line++;
+		}
+		mat[0][0] = 'D';
 	}
-	maze->m_width = ft_strlen(&maze->lines[0][0]);
-	maze->lines[maze->m_height + 1] = NULL;
-	check_map_wall(maze);
-	// count_map_pce(maze);
-	// check_error_pce(maze);
+	free(mat);
+	free(aux);
 }

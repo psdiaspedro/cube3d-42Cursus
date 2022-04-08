@@ -1,7 +1,7 @@
 
-NAME		=	cub3d
+NAME		=	cub3D
 CC			=	gcc
-FLAGS		=	# -Wall -Wextra -Werror
+FLAGS		=	-g #-fsanitize=address# -Wall -Wextra -Werror
 MLXFLAGS	=	-lmlx_Linux -lXext -lX11
 RM			=	rm -fr
 OBJECT_DIR	=	./objects/
@@ -14,10 +14,12 @@ SRC_FILES =	main.c \
 			init.c \
 			run.c \
 			get_map_struct.c \
-			get_next_line.c
+			get_next_line.c \
+			get_next_line_utils.c \
+			free_all.c
 
 SRC_DIR	=	./src/
-SRC		=	$(addprefix $(SRC_DIR), main.c init.c run.c)
+SRC		=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 
 OBJECTS = $(patsubst $(SRC_DIR)%.c, $(OBJECT_DIR)%.o, $(SRC))
 
@@ -29,10 +31,13 @@ $(NAME): $(OBJECTS) $(LIBFT)
 
 $(OBJECT_DIR)%.o:	$(SRC_DIR)%.c
 		$(MAKE_DIR) $(OBJECT_DIR)
-		$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@
+		$(CC) $(FLAGS) -I $(INCLUDES) -c $< -o $@
 
 $(LIBFT):
 		$(MAKE) -C $(LIBFT_DIR)
+
+val:
+	valgrind -s ./cub3D maps/map.cub
 
 clean:
 	$(RM) $(OBJECT_DIR)

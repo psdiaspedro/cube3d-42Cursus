@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:06:03 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/05 10:15:18 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/08 11:58:21 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,10 @@ void	init_images(t_game *game)
 {
 	game->canvas.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->canvas.addr = mlx_get_data_addr(game->canvas.img, &game->canvas.bits_per_pixel, &game->canvas.line_length, &game->canvas.endian);
+}
+
+void	init_map(t_game *game)
+{
+	// Put the number of map lines instead of 50
+	game->map = ft_calloc(sizeof(char*), 50);
 }
