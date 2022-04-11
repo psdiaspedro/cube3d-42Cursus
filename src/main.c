@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:05:54 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/08 11:41:00 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/11 09:45:32 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,9 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	if (argc > 2 || argc < 2)
-	{
-		ft_putendl_fd("ERROR:\nWrong number of arguments!:/", 2);
-		return (1);
-	}
 	init_map(&game);
-	get_map_struct(argv, &game);
+	if (!get_map_struct(argc, argv, &game))
+		return (1);
 	t_vec	cameraPixel;
 
 	init_game(&game);
@@ -33,4 +29,3 @@ int	main(int argc, char **argv)
 	free_all(&game);
 	return (0);
 }
-

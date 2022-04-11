@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 18:03:28 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/08 12:13:28 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/11 09:51:01 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,50 @@ char	**fix_line(char *aux)
 	return (lines);
 }
 
-// void	get_path(t_game *game)
-// {
-	
-// }
-
-void	get_map_struct(char **argv, t_game *game)
+void	get_path(t_game *game, char **mat)
 {
-	const char	*address;
+	if (mat[0][0] == 'N')
+			game->no = ft_strdup(mat[1]);
+	else if (mat[0][0] == 'S')
+		game->so = ft_strdup(mat[1]);
+	else if (mat[0][0] == 'E')
+		game->ea = ft_strdup(mat[1]);
+	else if (mat[0][0] == 'W')
+		game->we = ft_strdup(mat[1]);
+	else if (mat[0][0] == 'C')
+		game->ceil_color = ft_strdup(mat[1]);
+	else if (mat[0][0] == 'F')
+		game->floor_color = ft_strdup(mat[1]);
+	printf("%s\n", mat[1]);
+}
+
+int	map_validation(int argc, t_game *game, char *address)
+{
+	game->fd = open(address, O_RDONLY);
+	if (argc > 2 || argc < 2)
+	{
+		ft_putendl_fd("ERROR:\nWrong number of arguments! :(", 2);
+		return (0);
+	}
+	if (game->fd < 0)
+	{
+		ft_putendl_fd("ERROR:\nInvalid map path! :(", 2);
+		return (0);
+	}
+	return (1);
+}
+
+int	get_map_struct(int argc, char **argv, t_game *game)
+{
 	char		*aux;
 	char		**mat;
 	int			line;
 	size_t		gnl_output;
 	int			numb_lines;
 
-	address = argv[1];
 	line = 0;
-	game->fd = open(address, O_RDONLY);
+	if (!map_validation(argc, game, argv[1]))
+		return (0);
 	gnl_output = 1;
 	numb_lines = 0;
 	while (gnl_output)
@@ -90,46 +117,17 @@ void	get_map_struct(char **argv, t_game *game)
 		{
 			mat = fix_line(aux);
 			numb_lines++;
-			// get_path(&game);
-		}
-		if (mat[0][0] == 'N')
-		{
-			game->no = ft_strdup(mat[1]);
-			printf("N %s\n", game->no);
-		}
-		else if (mat[0][0] == 'S')
-		{
-			game->so = ft_strdup(mat[1]);
-			printf("S %s\n", game->so);
-		}
-		else if (mat[0][0] == 'E')
-		{
-			game->ea = ft_strdup(mat[1]);
-			printf("E %s\n", game->ea);
-		}
-		else if (mat[0][0] == 'W')
-		{
-			game->we = ft_strdup(mat[1]);
-			printf("W %s\n", game->we);
-		}
-		else if (mat[0][0] == 'C')
-		{
-			game->ceil_color = ft_strdup(mat[1]);
-			printf("C %s\n", game->ceil_color);
-		}
-		else if (mat[0][0] == 'F')
-		{
-			game->floor_color = ft_strdup(mat[1]);
-			printf("F %s\n", game->floor_color);
+			get_path(game, mat);
 		}
 		else
 		{
 			game->map[line] = ft_strdup(aux);
-			printf("MAP %s\n", game->map[line]);
+			printf("%s\n", game->map[line]);
 			line++;
 		}
 		mat[0][0] = 'D';
 	}
 	free(mat);
 	free(aux);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/08 09:09:57 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/11 09:51:50 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,9 @@ void	init_game(t_game *game);
 void	init_images(t_game *game);
 void	run(t_game *game);
 void	init_player(t_game *game);
-void	get_map_struct(char **argv, t_game *game);
+int		get_map_struct(int argc, char **argv, t_game *game);
+void	get_path(t_game *game, char **mat);
+int		map_validation(int argc, t_game *game, char *address);
 void	free_all(t_game *game);
 
 #endif
