@@ -1,7 +1,7 @@
 
 NAME		=	cub3d
 CC			=	gcc
-FLAGS		=	# -Wall -Wextra -Werror
+FLAGS		=	-g # -Wall -Wextra -Werror
 MLXFLAGS	=	-lmlx_Linux -lXext -lX11
 RM			=	rm -fr
 OBJECT_DIR	=	./objects/
@@ -18,7 +18,9 @@ SRC_FILES =	main.c \
 			draw.c \
 			raycasting.c \
 			hooks.c \
-			render.c
+			render.c \
+			update.c \
+			texture.c
 
 SRC_DIR	=	./src/
 SRC		=	$(addprefix $(SRC_DIR), $(SRC_FILES))
@@ -33,7 +35,7 @@ $(NAME): $(OBJECTS) $(LIBFT)
 
 $(OBJECT_DIR)%.o:	$(SRC_DIR)%.c
 		$(MAKE_DIR) $(OBJECT_DIR)
-		$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@
+		$(CC) $(FLAGS) -I $(INCLUDES) -c $< -o $@
 
 $(LIBFT):
 		$(MAKE) -C $(LIBFT_DIR)

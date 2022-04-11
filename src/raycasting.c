@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 13:49:32 by paugusto          #+#    #+#             */
-/*   Updated: 2022/04/07 13:49:54 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/11 13:56:47 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	calc_dist(t_game *game, t_vec *ray_dir, t_rays *rays)
 
 void	dda(t_game *game, t_rays *rays)
 {
-	while (game->map[rays->map_pos.y][rays->map_pos.x] == 0)
+	while (game->map[rays->map_pos.y][rays->map_pos.x] == FLOOR)
 	{
 		if (rays->dist_x < rays->dist_y)
 		{
@@ -93,5 +93,5 @@ void	raycasting(t_game *game, t_rays *rays, int pixel)
 	calc_dist(game, &ray_dir, rays);
 	dda(game, rays);
 	perpendicular_dist(game, &ray_dir, rays);
-	get_wall_size(game, rays, pixel);
+	get_wall_size(game, &ray_dir, rays, pixel);
 }

@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:32:16 by paugusto          #+#    #+#             */
-/*   Updated: 2022/04/05 13:57:13 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/11 13:56:27 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	player_walk_up_down(t_game *game)
 	else
 		vec_scale(&velocity, 0);
 	if (game->map[(int)game->player.pos.y] \
-	[(int)(game->player.pos.x + velocity.x * 5)] == 0)
+	[(int)(game->player.pos.x + velocity.x * 5)] == FLOOR)
 		game->player.pos.x += velocity.x;
 	if (game->map[(int)(game->player.pos.y + velocity.y * 5)] \
-	[(int)game->player.pos.x] == 0)
+	[(int)game->player.pos.x] == FLOOR)
 		game->player.pos.y += velocity.y;
 }
 
@@ -51,10 +51,10 @@ void	player_walk_left_right(t_game *game)
 	else
 		vec_scale(&strafe_velocity, 0);
 	if (game->map[(int)game->player.pos.y] \
-	[(int)(game->player.pos.x + strafe_velocity.x * 5)] == 0)
+	[(int)(game->player.pos.x + strafe_velocity.x * 5)] == FLOOR)
 		game->player.pos.x += strafe_velocity.x;
 	if (game->map[(int)(game->player.pos.y + strafe_velocity.y * 5)] \
-	[(int)game->player.pos.x] == 0)
+	[(int)game->player.pos.x] == FLOOR)
 		game->player.pos.y += strafe_velocity.y;
 }
 
@@ -98,3 +98,4 @@ void	change_plane(t_game *game, float rot_speed)
 	game->player.plane.y = old_plane_x * sin(rot_speed) + \
 	game->player.plane.y * cos(rot_speed);
 }
+

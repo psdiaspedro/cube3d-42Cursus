@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/06 12:06:00 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/11 13:54:47 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@
 # define HEIGHT				700
 # define ESC 				0xff1b
 # define PI 				3.141592653589f
+# define TEX_WIDTH			64
+# define TEX_HEIGHT			64
+# define MAP_WIDTH			24
+# define MAP_HEIGHT			24
+# define FLOOR				'0'
+# define WALL				'1'
 
 typedef struct	s_data {
 	void	*img;
@@ -38,11 +44,22 @@ typedef struct	s_data {
 	int		endian;
 }	t_data;
 
+typedef struct s_img {
+	t_data	no;
+	t_data	so;
+	t_data	we;
+	t_data	ea;
+}	t_img;
 
 typedef struct s_draw{
-	int	wall_line_height;
-	int start_line;
-	int end_line;
+	int		wall_line_height;
+	int		start_line;
+	int		end_line;
+	int		tex_x;
+	int		tex_y;
+	double	tex_pos;
+	double	step;
+	t_data	*data;
 } t_draw;
 
 typedef struct s_buttons
@@ -79,14 +96,11 @@ typedef struct	s_player {
 typedef struct s_game{
 	t_player	player;
 	t_buttons	buttons;
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
+	t_img		img;
 	void		*mlx;
 	void		*win;
 	t_data		canvas;
-	int			map[10][10];
+	char		map[10][10];
 }	t_game;
 
 void	init_game(t_game *game);
@@ -106,10 +120,10 @@ float	mag_vec(t_vec *v);
 t_vec	sum_vec(t_vec v1, t_vec v2);
 
 //draw pixel
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int		get_pixel(t_data *data, int x, int y);
+void	my_mlx_pixel_put(t_data *data, t_vec point, int color);
+int		get_pixel(t_data *data, t_vec point);
 void	draw_background(t_game *game);
-void	get_wall_size(t_game *game, t_rays *rays, int pixel);
+void	get_wall_size(t_game *game, t_vec *ray_dir, t_rays *rays, int pixel);
 
 //raycasting algorithm
 void	calc_delta(t_game *game, t_vec *rayDir, t_rays *rays);
@@ -127,7 +141,5 @@ int	render(t_game *game);
 
 //update
 void	update_frame(t_game *game);
-
-
 
 #endif
