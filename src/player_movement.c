@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:32:16 by paugusto          #+#    #+#             */
-/*   Updated: 2022/04/11 13:56:27 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/11 21:41:11 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,3 @@ void	change_plane(t_game *game, float rot_speed)
 	game->player.plane.y = old_plane_x * sin(rot_speed) + \
 	game->player.plane.y * cos(rot_speed);
 }
-
