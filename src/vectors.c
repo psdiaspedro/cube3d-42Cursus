@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run.c                                              :+:      :+:    :+:   */
+/*   vectors.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 10:14:48 by paugusto          #+#    #+#             */
-/*   Updated: 2022/04/06 12:08:02 by paugusto         ###   ########.fr       */
+/*   Created: 2022/04/05 13:59:04 by paugusto          #+#    #+#             */
+/*   Updated: 2022/04/07 13:51:14 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-void	run(t_game *game)
+float	mag_vec(t_vec *v)
 {
-	mlx_loop_hook(game->mlx, &render, game);
-	mlx_hook(game->win, KEY_PRESS, KEY_PRESS_MASK, press_key, game);
-	mlx_hook(game->win, KEY_RELEASE, KEY_RELEASE_MASK, release_key, game);
-	mlx_loop(game->mlx);
+	float	hypotenuse;
+
+	hypotenuse = sqrt((v->x * v->x) + (v->y * v->y));
+	return (hypotenuse);
+}
+
+t_vec	sum_vec(t_vec v1, t_vec v2)
+{
+	t_vec	sum;
+
+	sum.x = v1.x + v2.x;
+	sum.y = v1.y + v2.y;
+	return (sum);
 }

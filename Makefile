@@ -16,7 +16,15 @@ SRC_FILES =	main.c \
 			get_map_struct.c \
 			get_next_line.c \
 			get_next_line_utils.c \
-			free_all.c
+			free_all.c \
+			player_movement.c \
+			vectors.c \
+			draw.c \
+			raycasting.c \
+			hooks.c \
+			render.c \
+			update.c \
+			texture.c
 
 SRC_DIR	=	./src/
 SRC		=	$(addprefix $(SRC_DIR), $(SRC_FILES))
@@ -37,7 +45,7 @@ $(LIBFT):
 		$(MAKE) -C $(LIBFT_DIR)
 
 val:
-	valgrind -s ./cub3D maps/map.cub
+	valgrind -s ./cub3D maps/map2.cub
 
 clean:
 	$(RM) $(OBJECT_DIR)
