@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:06:03 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/13 09:55:13 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/13 10:36:34 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int	open_xpm_file(t_game *game, t_data *data, char *filename)
 	data->img = mlx_xpm_file_to_image(game->mlx, filename, &trash, &trash);
 	if (!data->img)
 	{
+		printf("pare de abrir a janela\n");
 		free_all(game);
 		exit(0);
 	}

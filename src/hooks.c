@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 10:38:53 by paugusto          #+#    #+#             */
-/*   Updated: 2022/04/06 10:39:00 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/13 10:41:27 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int	press_key(int key_code, t_game *game)
 	if (key_code == ' ')
 		game->buttons.function = 1;
 	if (key_code == ESC)
+	{
 		game->buttons.exit = 1;
+		kill_window(game);
+	}
 	if (key_code == RIGHT_ARROW)
 		game->buttons.rotate_right = 1;
 	if (key_code == LEFT_ARROW)

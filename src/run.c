@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 10:14:48 by paugusto          #+#    #+#             */
-/*   Updated: 2022/04/12 11:29:46 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/13 10:26:51 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	kill_window(t_game *game)
 {
+	free_all(game);
 	mlx_clear_window(game->mlx, game->win);
 	mlx_loop_end(game->mlx);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
-	free_all(game);
 	exit(0);
 	return (0);
 }

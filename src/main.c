@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:05:54 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/13 09:03:31 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/13 10:37:20 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int argc, char **argv)
 		free_all(&game);
 		return (1);
 	}
+	
 	init_game(&game);
 	init_images(&game);
 	init_player(&game);
