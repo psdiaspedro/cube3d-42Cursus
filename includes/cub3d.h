@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/13 08:56:14 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/13 10:20:42 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,5 +161,12 @@ int	render(t_game *game);
 
 //update
 void	update_frame(t_game *game);
+
+
+//player directions
+void	north(t_game *game, int x, int y);
+void	south(t_game *game, int x, int y);
+void	east(t_game *game, int x, int y);
+void	west(t_game *game, int x, int y);
 
 #endif
