@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 21:08:53 by paugusto          #+#    #+#             */
-/*   Updated: 2022/04/11 13:57:08 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/11 21:35:48 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@
 
 */
 
+void	solve_mirror(t_vec *ray_dir, t_rays *rays, t_draw *draw)
+{
+	if (rays->hit_side == 0 && ray_dir->x < 0)
+		draw->tex_x = TEX_WIDTH - draw->tex_x - 1;
+	if (rays->hit_side == 1 && ray_dir->y > 0)
+		draw->tex_x = TEX_WIDTH - draw->tex_x - 1;
+}
+
 //pega a cordenada x da textura, que permanece a mesma
 void	get_texture_x(t_game *game, t_vec *ray_dir, t_draw *draw, t_rays *rays)
 {
@@ -34,23 +42,24 @@ void	get_texture_x(t_game *game, t_vec *ray_dir, t_draw *draw, t_rays *rays)
 	if (rays->hit_side == 0)
 	{
 		if (ray_dir->x > 0)
-			wall_x = fabs(game->player.pos.y + rays->perpendicular_dist * ray_dir->y);
+			wall_x = fabs(game->player.pos.y + rays->perpendicular_dist \
+			* ray_dir->y);
 		else
-			wall_x = fabs(game->player.pos.y - rays->perpendicular_dist * ray_dir->y);
+			wall_x = fabs(game->player.pos.y - rays->perpendicular_dist \
+			* ray_dir->y);
 	}
 	else
 	{
 		if (ray_dir->y > 0)
-			wall_x = fabs(game->player.pos.x + rays->perpendicular_dist * ray_dir->x);
+			wall_x = fabs(game->player.pos.x + rays->perpendicular_dist \
+			* ray_dir->x);
 		else
-			wall_x = fabs(game->player.pos.x - rays->perpendicular_dist * ray_dir->x);
+			wall_x = fabs(game->player.pos.x - rays->perpendicular_dist \
+			* ray_dir->x);
 	}
 	wall_x -= floor(wall_x);
 	draw->tex_x = (int)(wall_x * (double)TEX_WIDTH);
-	if (rays->hit_side == 0 && ray_dir->x < 0)
-		draw->tex_x = TEX_WIDTH - draw->tex_x - 1;
-	if (rays->hit_side == 1 && ray_dir->y > 0)
-		draw->tex_x = TEX_WIDTH - draw->tex_x - 1;
+	solve_mirror(ray_dir, rays, draw);
 }
 
 t_data	*get_texture(t_game *game, t_vec *ray_dir, t_rays *rays)
@@ -69,7 +78,10 @@ t_data	*get_texture(t_game *game, t_vec *ray_dir, t_rays *rays)
 	}
 }
 
-//agora que ja temos o x, precisamos de um loop no y (pois o x permanece o mesmo) tex_y
+/*
+	agora que ja temos o x, precisamos de um loop no y
+	(pois o x permanece o mesmo) tex_y
+*/
 void	get_texture_y(t_game *game, t_vec *ray_dir, t_draw *draw, t_rays *rays)
 {
 	int	sl;
@@ -84,14 +96,15 @@ void	get_texture_y(t_game *game, t_vec *ray_dir, t_draw *draw, t_rays *rays)
 	{
 		draw->tex_y = (int)draw->tex_pos & (TEX_HEIGHT - 1);
 		draw->tex_pos += draw->step;
-		color = get_pixel(draw->data, (t_vec){.x = draw->tex_x, .y = draw->tex_y});
+		color = get_pixel(draw->data, \
+		(t_vec){.x = draw->tex_x, .y = draw->tex_y});
 		if (rays->hit_side == 1)
 			color = 65280;
-		my_mlx_pixel_put(&game->canvas, (t_vec){.x = rays->rays, .y = sl}, color);
+		my_mlx_pixel_put(&game->canvas, \
+		(t_vec){.x = rays->rays, .y = sl}, color);
 		sl++;
 	}
 }
-
 
 void	get_wall_size(t_game *game, t_vec *ray_dir, t_rays *rays, int pixel)
 {

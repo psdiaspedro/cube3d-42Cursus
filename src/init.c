@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:06:03 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/12 20:20:12 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/13 08:57:34 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_game(t_game *game)
 
 int	open_xpm_file(t_game *game, t_data *data, char *filename)
 {
-	int trash;
+	int	trash;
 
 	data->img = mlx_xpm_file_to_image(game->mlx, filename, &trash, &trash);
 	if (!data->img)
