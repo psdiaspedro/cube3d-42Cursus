@@ -26,7 +26,8 @@ SRC_FILES =	main.c					\
 			update.c				\
 			texture.c				\
 			handle_wall.c			\
-			player_direction.c
+			player_direction.c		\
+			color.c
 
 SRC_DIR	=	./src/
 SRC		=	$(addprefix $(SRC_DIR), $(SRC_FILES))
@@ -47,7 +48,7 @@ $(LIBFT):
 		$(MAKE) -C $(LIBFT_DIR)
 
 val:
-	valgrind -s --leak-check=full --show-leak-kinds=all ./cub3D maps/map.cub
+	valgrind -s --leak-check=full --show-leak-kinds=all ./cub3D maps/map3.cub
 
 clean:
 	$(RM) $(OBJECT_DIR)

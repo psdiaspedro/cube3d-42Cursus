@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/13 10:50:20 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/13 11:40:37 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ typedef struct s_game{
 	char		**map;
 	char		*floor_color;
 	char		*ceil_color;
+	int			ccolor;
+	int			fcolor;
 	t_data		canvas;
 }	t_game;
 
@@ -127,6 +129,7 @@ void	free_all(t_game *game);
 void	free_matrix(char **mat);
 void	free_map_vars(char **map, char **aux, char **temp);
 int		kill_window(t_game *game);
+int		get_rgb(char *color);
 
 //player player_movement
 void	change_direction(t_game *game, float rot_speed);

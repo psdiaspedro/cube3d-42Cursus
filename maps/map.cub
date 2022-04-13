@@ -1,12 +1,12 @@
 NO ./imgs/no_redbrick.xpm
 
 
+C 225      ,   30 ,      0
 SO ./imgs/so_redbrick.xpm
 
 WE ./imgs/we_redbrick.xpm
 EA ./imgs/ea_redbrick.xpm
 F 220           ,          100           ,           0
-C 225      ,   30 ,      0
 
 1111111111
 1100000001

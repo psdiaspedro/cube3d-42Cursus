@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_direction.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 10:17:55 by paugusto          #+#    #+#             */
-/*   Updated: 2022/04/13 10:22:49 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/13 10:58:11 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	north(t_game *game, int x, int y)
 {
 	if (game->player.pos.y != -1.0f || game->player.pos.x != -1.0f)
 	{
-		;//ja entrou, ja possui jogador
+		free_all(game);
+		ft_putendl_fd("ERROR\nGame must have just one player", 2);
+		exit(0);
 	}
 	game->player.pos.y = y + 0.5f;
 	game->player.pos.x = x + 0.5f;
@@ -31,7 +33,9 @@ void	south(t_game *game, int x, int y)
 {
 	if (game->player.pos.y != -1.0f || game->player.pos.x != -1.0f)
 	{
-		;//ja entrou, ja possui jogador
+		free_all(game);
+		ft_putendl_fd("ERROR\nGame must have just one player", 2);
+		exit(0);
 	}
 	game->player.pos.y = y + 0.5f;
 	game->player.pos.x = x + 0.5f;
@@ -46,7 +50,9 @@ void	east(t_game *game, int x, int y)
 {
 	if (game->player.pos.y != -1.0f || game->player.pos.x != -1.0f)
 	{
-		;//ja entrou, ja possui jogador
+		free_all(game);
+		ft_putendl_fd("ERROR\nGame must have just one player", 2);
+		exit(0);
 	}
 	game->player.pos.y = y + 0.5f;
 	game->player.pos.x = x + 0.5f;
@@ -61,7 +67,9 @@ void	west(t_game *game, int x, int y)
 {
 	if (game->player.pos.y != -1.0f || game->player.pos.x != -1.0f)
 	{
-		;//ja entrou, ja possui jogador
+		free_all(game);
+		ft_putendl_fd("ERROR\nGame must have just one player", 2);
+		exit(0);
 	}
 	game->player.pos.y = y + 0.5f;
 	game->player.pos.x = x + 0.5f;
