@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/13 10:40:55 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/13 10:50:20 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,5 +161,12 @@ int	render(t_game *game);
 
 //update
 void	update_frame(t_game *game);
+
+
+//player directions
+void	north(t_game *game, int x, int y);
+void	south(t_game *game, int x, int y);
+void	east(t_game *game, int x, int y);
+void	west(t_game *game, int x, int y);
 
 #endif

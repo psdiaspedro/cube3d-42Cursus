@@ -6,17 +6,19 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:06:03 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/13 10:36:34 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/13 10:50:03 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	current_position(t_game *game)
+void	init_player(t_game *game)
 {
 	int	y;
 	int	x;
 
+	game->player.pos.y = -1.0f;
+	game->player.pos.x = -1.0f;
 	y = 0;
 	while (game->map[y])
 	{
@@ -24,58 +26,21 @@ void	current_position(t_game *game)
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] == 'N')
-			{
-				game->player.pos.y = y + 0.5f;
-				game->player.pos.x = x + 0.5f;
-				game->player.dir.y = -1;
-				game->player.dir.x = 0;
-				game->player.plane.x = 0.66;
-				game->player.plane.y = 0;
-				game->map[y][x] = FLOOR;
-				return ;
-			}
+				north(game, x, y);
 			if (game->map[y][x] == 'S')
-			{
-				game->player.pos.y = y + 0.5f;
-				game->player.pos.x = x + 0.5f;
-				game->player.dir.y = 1;
-				game->player.dir.x = 0;
-				game->player.plane.x = -0.66;
-				game->player.plane.y = 0;
-				game->map[y][x] = FLOOR;
-				return ;
-			}
+				south(game, x, y);
 			if (game->map[y][x] == 'E')
-			{
-				game->player.pos.y = y + 0.5f;
-				game->player.pos.x = x + 0.5f;
-				game->player.dir.y = 0;
-				game->player.dir.x = 1;
-				game->player.plane.x = 0;
-				game->player.plane.y = 0.66;
-				game->map[y][x] = FLOOR;
-				return ;
-			}
+				east(game, x, y);
 			if (game->map[y][x] == 'W')
-			{
-				game->player.pos.y = y + 0.5f;
-				game->player.pos.x = x + 0.5f;
-				game->player.dir.y = 0;
-				game->player.dir.x = -1;
-				game->player.plane.x =0;
-				game->player.plane.y = -0.66;
-				game->map[y][x] = FLOOR;
-				return ;
-			}
+				west(game, x, y);
 			x++;
 		}
 		y++;
 	}
-}
-
-void	init_player(t_game *game)
-{
-	current_position(game);
+	if (game->player.pos.y == -1.0f || game->player.pos.x == -1.0f)
+	{
+		;//nao mudou o valor, nao tem jogador
+	}
 }
 
 void	init_game(t_game *game)

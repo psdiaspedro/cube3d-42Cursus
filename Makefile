@@ -10,22 +10,23 @@ INCLUDES	=	./includes
 PATH_LIBVEC	=	./vectors
 LIBFT = libft/libft.a
 LIBFT_DIR = ./libft
-SRC_FILES =	main.c                \
-			init.c                \
-			run.c                 \
-			get_map_struct.c      \
-			get_next_line.c       \
-			get_next_line_utils.c \
-			free_all.c            \
-			player_movement.c     \
-			vectors.c             \
-			draw.c                \
-			raycasting.c          \
-			hooks.c               \
-			render.c              \
-			update.c              \
-			texture.c             \
-			handle_wall.c
+SRC_FILES =	main.c					\
+			init.c					\
+			run.c					\
+			get_map_struct.c		\
+			get_next_line.c			\
+			get_next_line_utils.c	\
+			free_all.c				\
+			player_movement.c		\
+			vectors.c				\
+			draw.c					\
+			raycasting.c			\
+			hooks.c					\
+			render.c				\
+			update.c				\
+			texture.c				\
+			handle_wall.c			\
+			player_direction.c
 
 SRC_DIR	=	./src/
 SRC		=	$(addprefix $(SRC_DIR), $(SRC_FILES))
