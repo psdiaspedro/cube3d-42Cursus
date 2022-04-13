@@ -6,13 +6,13 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 17:37:06 by dalves-s          #+#    #+#             */
-/*   Updated: 2021/06/11 22:59:35 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/12 10:50:52 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char const *s2)
 {
 	char	*joined;
 	size_t	i;
@@ -37,5 +37,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		i++;
 	}
 	joined[i] = '\0';
+	free(s1);
 	return (joined);
 }

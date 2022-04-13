@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:06:03 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/11 15:40:47 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/12 20:20:12 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,8 @@ void	init_images(t_game *game)
 	game->canvas.img, &game->canvas.bits_per_pixel, \
 	&game->canvas.line_length, &game->canvas.endian);
 
-	open_xpm_file(game, &game->img.no, "./imgs/no_redbrick.xpm");
-	open_xpm_file(game, &game->img.so, "./imgs/so_redbrick.xpm");
-	open_xpm_file(game, &game->img.we, "./imgs/we_redbrick.xpm");
-	open_xpm_file(game, &game->img.ea, "./imgs/ea_redbrick.xpm");
-
-}
-
-void	init_map(t_game *game)
-{
-	// Put the number of map lines instead of 50
-	game->map = ft_calloc(sizeof(char*), 50);
+	open_xpm_file(game, &game->img.no, game->img.no.path);
+	open_xpm_file(game, &game->img.so, game->img.so.path);
+	open_xpm_file(game, &game->img.we, game->img.we.path);
+	open_xpm_file(game, &game->img.ea, game->img.ea.path);
 }
