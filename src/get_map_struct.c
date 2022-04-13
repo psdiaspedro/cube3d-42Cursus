@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_struct.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 18:03:28 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/12 20:32:32 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/13 09:59:34 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,10 @@ int	get_map_struct(int argc, char **argv, t_game *game, int numb_lines)
 		if (temp[0] == '1')
 			get_map(&map, aux);
 		if (aux[0] == '\0')
+		{
+			free_map_vars(&map, &aux, &temp);
 			continue ;
+		}
 		if (numb_lines < 6)
 			numb_lines = get_path(game, aux, numb_lines + 1);
 		free_map_vars(&map, &aux, &temp);

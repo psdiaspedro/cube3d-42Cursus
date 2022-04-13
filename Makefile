@@ -46,7 +46,7 @@ $(LIBFT):
 		$(MAKE) -C $(LIBFT_DIR)
 
 val:
-	valgrind -s --leak-check=full --show-leak-kinds=all ./cub3D maps/map.cub
+	valgrind -s --leak-check=full --show-leak-kinds=all ./cub3D maps/map2.cub
 
 clean:
 	$(RM) $(OBJECT_DIR)
