@@ -25,9 +25,10 @@ SRC_FILES =	main.c					\
 			render.c				\
 			update.c				\
 			texture.c				\
-			handle_wall.c			\
 			player_direction.c		\
-			color.c
+			color.c					\
+			map_validation.c		\
+			map_validation_utils.c
 
 SRC_DIR	=	./src/
 SRC		=	$(addprefix $(SRC_DIR), $(SRC_FILES))

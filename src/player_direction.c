@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_direction.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 10:17:55 by paugusto          #+#    #+#             */
-/*   Updated: 2022/04/13 10:58:11 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/14 08:25:00 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	west(t_game *game, int x, int y)
 	game->player.pos.x = x + 0.5f;
 	game->player.dir.y = 0;
 	game->player.dir.x = -1;
-	game->player.plane.x =0;
+	game->player.plane.x = 0;
 	game->player.plane.y = -0.66;
 	game->map[y][x] = FLOOR;
 }

@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:06:03 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/13 11:43:32 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/14 08:27:15 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	error_no_player(t_game *game)
+{
+	free_all(game);
+	ft_putendl_fd("ERROR\nGame must have a player", 2);
+	exit(0);
+}
 
 void	init_player(t_game *game)
 {
@@ -38,11 +45,7 @@ void	init_player(t_game *game)
 		y++;
 	}
 	if (game->player.pos.y == -1.0f || game->player.pos.x == -1.0f)
-	{
-		free_all(game);//nao mudou o valor, nao tem jogador
-		ft_putendl_fd("ERROR\nGame must have a player", 2);
-		exit(0);
-	}
+		error_no_player(game);
 }
 
 void	init_game(t_game *game)
@@ -73,7 +76,6 @@ void	init_images(t_game *game)
 	game->canvas.addr = mlx_get_data_addr(\
 	game->canvas.img, &game->canvas.bits_per_pixel, \
 	&game->canvas.line_length, &game->canvas.endian);
-
 	open_xpm_file(game, &game->img.no, game->img.no.path);
 	open_xpm_file(game, &game->img.so, game->img.so.path);
 	open_xpm_file(game, &game->img.we, game->img.we.path);

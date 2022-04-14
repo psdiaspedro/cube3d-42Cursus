@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/13 11:40:37 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/14 08:38:21 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,5 +171,9 @@ void	north(t_game *game, int x, int y);
 void	south(t_game *game, int x, int y);
 void	east(t_game *game, int x, int y);
 void	west(t_game *game, int x, int y);
+
+//map
+int	check_map_struct(t_game *game, int line, int column);
+int	check_wall(t_game *game, int line, int column);
 
 #endif
