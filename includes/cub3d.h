@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/14 08:38:21 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/14 08:48:23 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,12 @@
 # include <math.h>
 # include <fcntl.h>
 
-# define KEY_PRESS_MASK		(1L<<0)
-# define KEY_RELEASE_MASK	(1L<<1)
 # define RIGHT_ARROW		65363
 # define LEFT_ARROW			65361
-# define KEY_RELEASE		3
-# define KEY_PRESS			2
 # define WIDTH				1200
 # define HEIGHT				700
-# define ESC 				0xff1b
-# define PI 				3.141592653589f
+# define ESC				0xff1b
+# define PI					3.141592653589f
 # define TEX_WIDTH			64
 # define TEX_HEIGHT			64
 # define MAP_WIDTH			24
@@ -38,7 +34,7 @@
 # define FLOOR				'0'
 # define WALL				'1'
 
-typedef struct	s_data {
+typedef struct s_data {
 	void	*img;
 	char	*addr;
 	char	*path;
@@ -63,7 +59,7 @@ typedef struct s_draw{
 	double	tex_pos;
 	double	step;
 	t_data	*data;
-} t_draw;
+}	t_draw;
 
 typedef struct s_buttons
 {
@@ -90,11 +86,11 @@ typedef struct s_rays{
 	int			step_y;
 }	t_rays;
 
-typedef struct	s_player {
+typedef struct s_player {
 	t_vec		pos;
 	t_vec		plane;
 	t_vec		dir;
-} t_player;
+}	t_player;
 
 typedef struct s_game{
 	t_player	player;
@@ -156,15 +152,14 @@ void	perpendicular_dist(t_game *game, t_vec *rayDir, t_rays *rays);
 void	raycasting(t_game *game, t_rays *rays, int pixel);
 
 //hooks
-int	press_key(int key_code, t_game *game);
-int	release_key(int key_code, t_game *game);
+int		press_key(int key_code, t_game *game);
+int		release_key(int key_code, t_game *game);
 
 //render
-int	render(t_game *game);
+int		render(t_game *game);
 
 //update
 void	update_frame(t_game *game);
-
 
 //player directions
 void	north(t_game *game, int x, int y);
@@ -173,7 +168,7 @@ void	east(t_game *game, int x, int y);
 void	west(t_game *game, int x, int y);
 
 //map
-int	check_map_struct(t_game *game, int line, int column);
-int	check_wall(t_game *game, int line, int column);
+int		check_map_struct(t_game *game, int line, int column);
+int		check_wall(t_game *game, int line, int column);
 
 #endif
