@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 08:02:52 by user42            #+#    #+#             */
-/*   Updated: 2021/09/26 17:48:57 by user42           ###   ########.fr       */
+/*   Updated: 2022/04/14 11:33:43 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,7 @@ void	vec_rotate(t_vec *vec, float	angle)
 	y = vec->y;
 	z = vec->z;
 	rad = angle * M_PI / 100;
-	
-	//vec->x = x * cos(rad) - y * sin(rad);
-	//vec->y = y * cos(rad) + x * sin(rad);
-	//vec->z = y * sin(rad) + z * cos(rad);
+
 	vec->y = y * cos(rad) - z * sin(rad);
 	vec->z = y * sin(rad) + z * cos(rad);
 	vec->x = x;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:06:03 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/14 08:27:15 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/16 17:35:15 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	error_no_player(t_game *game)
 {
 	free_all(game);
-	ft_putendl_fd("ERROR\nGame must have a player", 2);
+	ft_putendl_fd("Error\nGame must have a player", 2);
 	exit(0);
 }
 
@@ -62,7 +62,7 @@ int	open_xpm_file(t_game *game, t_data *data, char *filename)
 	if (!data->img)
 	{
 		free_all(game);
-		ft_putendl_fd("ERROR\nImage doesn't exist", 2);
+		ft_putendl_fd("Error\nImage doesn't exist", 2);
 		exit(0);
 	}
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
@@ -70,7 +70,7 @@ int	open_xpm_file(t_game *game, t_data *data, char *filename)
 	return (0);
 }
 
-void	init_images(t_game *game)
+int	init_images(t_game *game)
 {
 	game->canvas.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->canvas.addr = mlx_get_data_addr(\
@@ -80,6 +80,5 @@ void	init_images(t_game *game)
 	open_xpm_file(game, &game->img.so, game->img.so.path);
 	open_xpm_file(game, &game->img.we, game->img.we.path);
 	open_xpm_file(game, &game->img.ea, game->img.ea.path);
-	game->ccolor = get_rgb(game->ceil_color);
-	game->fcolor = get_rgb(game->floor_color);
+	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/14 08:48:23 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/16 17:22:07 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,13 @@ typedef struct s_game{
 	char		*ceil_color;
 	int			ccolor;
 	int			fcolor;
+	char		*aux;
+	char		*temp;
+	char		*map_line;
 	t_data		canvas;
 }	t_game;
 
-void	init_map(t_game *game);
-void	init_game(t_game *game);
-void	init_images(t_game *game);
-void	run(t_game *game);
-void	init_player(t_game *game);
+//Map and structure initializers
 int		get_map_struct(int argc, char **argv, t_game *game, int numb_lines);
 void	get_map(char **map, char *aux);
 int		map_validation(int argc, t_game *game, char *address);
@@ -121,11 +120,20 @@ int		check_front(t_game *game, int line, int column);
 int		check_back(t_game *game, int line, int column);
 int		check_up(t_game *game, int line, int column);
 int		check_bottom(t_game *game, int line, int column);
+int		get_rgb(char *color);
+
+//Program initializers
+void	init_map(t_game *game);
+void	init_game(t_game *game);
+int		init_images(t_game *game);
+void	init_player(t_game *game);
+void	run(t_game *game);
+
+//Release and end the program
 void	free_all(t_game *game);
 void	free_matrix(char **mat);
 void	free_map_vars(char **map, char **aux, char **temp);
 int		kill_window(t_game *game);
-int		get_rgb(char *color);
 
 //player player_movement
 void	change_direction(t_game *game, float rot_speed);

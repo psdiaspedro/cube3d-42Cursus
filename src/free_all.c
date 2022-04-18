@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:23:35 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/14 08:35:30 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/14 11:22:24 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	free_map(t_game *game)
 		i++;
 	}
 	free(game->map);
+	free(game->map_line);
 	game->map = NULL;
 }
 

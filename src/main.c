@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:05:54 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/14 08:28:22 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/16 22:15:40 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ int	check_path(t_game *game)
 {
 	int	fd;
 
+	game->ccolor = get_rgb(game->ceil_color);
+	game->fcolor = get_rgb(game->floor_color);
+	if (!game->fcolor || !game->ccolor)
+		return (0);
 	fd = open(game->img.ea.path, O_RDONLY);
 	if (fd < 0)
 		return (0);
@@ -40,19 +44,20 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!check_map_struct(&game, 0, 0))
 	{
-		ft_putendl_fd("ERROR\nMap must be surrounded by walls! :(", 2);
+		ft_putendl_fd("Error\nMap must be surrounded by walls! :(", 2);
 		free_all(&game);
 		return (1);
 	}
 	if (!check_path(&game))
 	{
-		ft_putendl_fd("ERROR\nInvalid path! :(", 2);
+		ft_putendl_fd("Error\nInvalid path! :(", 2);
 		free_all(&game);
 		return (1);
 	}
 	init_player(&game);
 	init_game(&game);
-	init_images(&game);
+	if (!init_images(&game))
+		return (1);
 	run(&game);
 	free_all(&game);
 	return (0);
