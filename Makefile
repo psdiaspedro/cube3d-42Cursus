@@ -38,8 +38,7 @@ OBJECTS = $(patsubst $(SRC_DIR)%.c, $(OBJECT_DIR)%.o, $(SRC))
 all: $(NAME)
 
 $(NAME): $(OBJECTS) $(LIBFT)
-		@make --no-print-directory -C $(PATH_LIBVEC)
-		$(CC) $(FLAGS) -I $(INCLUDES) $(OBJECTS) $(LIBFT) -o $(NAME) $(MLXFLAGS) -lm -L$(PATH_LIBVEC) -lvec
+		$(CC) $(FLAGS) -I $(INCLUDES) $(OBJECTS) $(LIBFT) -o $(NAME) $(MLXFLAGS) -lm
 
 $(OBJECT_DIR)%.o:	$(SRC_DIR)%.c
 		$(MAKE_DIR) $(OBJECT_DIR)
@@ -53,12 +52,10 @@ val:
 
 clean:
 	$(RM) $(OBJECT_DIR)
-	$(MAKE) -C $(PATH_LIBVEC) clean
 	$(MAKE) fclean -C $(LIBFT_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
-	make -C $(PATH_LIBVEC) fclean
 
 re: fclean all
 

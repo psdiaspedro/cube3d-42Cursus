@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/16 17:22:07 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/18 12:04:46 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <mlx.h>
 # include <X11/X.h>
-# include "../vectors/vec.h"
 # include <stdio.h>
 # include <libft.h>
 # include <math.h>
@@ -33,6 +32,21 @@
 # define MAP_HEIGHT			24
 # define FLOOR				'0'
 # define WALL				'1'
+
+typedef struct s_int_vec
+{
+	int	x;
+	int	y;
+}	t_int_vec;
+
+typedef struct s_vec
+{
+	float			x;
+	float			y;
+	float			z;
+	float			magnitude;
+	struct s_vec	*next;
+}	t_vec;
 
 typedef struct s_data {
 	void	*img;
@@ -145,6 +159,7 @@ void	player_walk_up_down(t_game *game);
 //vectors
 float	mag_vec(t_vec *v);
 t_vec	sum_vec(t_vec v1, t_vec v2);
+void	vec_scale(t_vec *v1, float scale);
 
 //draw pixel
 void	my_mlx_pixel_put(t_data *data, t_vec point, int color);
