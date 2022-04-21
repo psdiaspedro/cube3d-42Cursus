@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:23:35 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/14 11:22:24 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/20 10:00:47 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	free_all(t_game *game)
 		mlx_destroy_image(game->mlx, game->img.we.img);
 	if (game->canvas.img)
 		mlx_destroy_image(game->mlx, game->canvas.img);
+	close(game->fd);
 }
 
 void	free_matrix(char **mat)

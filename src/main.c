@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:05:54 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/16 22:15:40 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/20 10:23:56 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,19 @@ int	check_path(t_game *game)
 	fd = open(game->img.ea.path, O_RDONLY);
 	if (fd < 0)
 		return (0);
+	close(game->fd);
 	fd = open(game->img.no.path, O_RDONLY);
 	if (fd < 0)
 		return (0);
+	close(game->fd);
 	fd = open(game->img.so.path, O_RDONLY);
 	if (fd < 0)
 		return (0);
+	close(game->fd);
 	fd = open(game->img.we.path, O_RDONLY);
 	if (fd < 0)
 		return (0);
+	close(game->fd);
 	return (1);
 }
 

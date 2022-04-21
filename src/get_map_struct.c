@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 18:03:28 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/16 22:56:43 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/20 10:36:42 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,27 @@
 
 char	**fix_line(char *aux)
 {
-	char	*temp;
+	// char	*temp;
 	char	**lines;
 	int		i;
 
 	i = 2;
-	temp = ft_strtrim(aux, " ");
-	lines = ft_split(temp, ' ');
-	while (lines[i] != NULL)
+	// temp = ft_strtrim(aux, " ");
+	lines = ft_split(aux, ' ');
+	if (lines[0] == "C" || lines[0] == "F")
 	{
-			lines[1] = ft_strjoin(lines[1], lines[i]);
-		i++;
+		while (lines[i] != NULL)
+		{
+				lines[1] = ft_strjoin(lines[1], lines[i]);
+			i++;
+		}
 	}
-	free(temp);
+	i = 0;
+	while (lines[i])
+		i++;
+	if (i > 2)
+		return (NULL);
+	// free(temp);
 	return (lines);
 }
 
@@ -36,19 +44,21 @@ int	get_path(t_game *game, char *aux, int numb_lines)
 	char	**mat;
 
 	mat = fix_line(aux);
-	if (!mat[1] || !ft_strchr("NSEWCF", mat[0][0]))
+	if (!mat || !mat[1] || !ft_strnstr(" NO SO EA WE C F ", mat[0], 18))
 		return (-1);
-	if (!ft_strncmp(mat[0], "NO", 2))
+	if (!check_repetition(game, mat))
+		return (-2);
+	if (!ft_strncmp(mat[0], "NO", 2) && ft_strlen(mat[0]) == 2)
 		game->img.no.path = ft_strdup(mat[1]);
-	else if (!ft_strncmp(mat[0], "SO", 2))
+	else if (!ft_strncmp(mat[0], "SO", 2) && ft_strlen(mat[0]) == 2)
 		game->img.so.path = ft_strdup(mat[1]);
-	else if (!ft_strncmp(mat[0], "EA", 2))
+	else if (!ft_strncmp(mat[0], "EA", 2) && ft_strlen(mat[0]) == 2)
 		game->img.ea.path = ft_strdup(mat[1]);
-	else if (!ft_strncmp(mat[0], "WE", 2))
+	else if (!ft_strncmp(mat[0], "WE", 2) && ft_strlen(mat[0]) == 2)
 		game->img.we.path = ft_strdup(mat[1]);
-	else if (!ft_strncmp(mat[0], "C", 1))
+	else if (!ft_strncmp(mat[0], "C", 1) && ft_strlen(mat[0]) == 1)
 		game->ceil_color = ft_strdup(mat[1]);
-	else if (!ft_strncmp(mat[0], "F", 1))
+	else if (!ft_strncmp(mat[0], "F", 1) && ft_strlen(mat[0]) == 1)
 		game->floor_color = ft_strdup(mat[1]);
 	mat[0][0] = 'D';
 	free_matrix(mat);
@@ -67,6 +77,31 @@ int	map_validation(int argc, t_game *game, char *address)
 	{
 		ft_putendl_fd("ERROR:\nInvalid map path! :(", 2);
 		return (0);
+	}
+	return (1);
+}
+
+int	check_repetition(t_game *game, char **mat)
+{
+	if (!ft_strncmp(mat[0], "NO", 2) && ft_strlen(mat[0]) == 2)
+	{
+		if (game->img.no.path)
+			return (0);
+	}
+	else if (!ft_strncmp(mat[0], "SO", 2) && ft_strlen(mat[0]) == 2)
+	{
+		if (game->img.so.path)
+			return (0);
+	}
+	else if (!ft_strncmp(mat[0], "EA", 2) && ft_strlen(mat[0]) == 2)
+	{
+		if (game->img.ea.path)
+			return (0);
+	}
+	else if (!ft_strncmp(mat[0], "WE", 2) && ft_strlen(mat[0]) == 2)
+	{
+		if (game->img.we.path)
+			return (0);
 	}
 	return (1);
 }
@@ -98,6 +133,11 @@ int	get_map_struct(int argc, char **argv, t_game *game, int numb_lines)
 		if (numb_lines == -1)
 		{
 			ft_putendl_fd("Error\nColor do not exist :(", 2);
+			return (0);
+		}
+		if (numb_lines == -2)
+		{
+			ft_putendl_fd("Error\nRepeated path :(", 2);
 			return (0);
 		}
 	}

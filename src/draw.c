@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:00:54 by paugusto          #+#    #+#             */
-/*   Updated: 2022/04/13 11:40:12 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/19 20:25:33 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	draw_background(t_game *game)
 		{
 			if (row < HEIGHT / 2)
 				my_mlx_pixel_put(&game->canvas, (t_vec){.x = col, .y = row}, \
-				game->fcolor);
+				game->ccolor);
 			else
 				my_mlx_pixel_put(&game->canvas, (t_vec){.x = col, .y = row}, \
-				game->ccolor);
+				game->fcolor);
 			row++;
 		}
 		col++;
