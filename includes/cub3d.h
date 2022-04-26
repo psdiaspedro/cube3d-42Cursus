@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/21 18:51:02 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/26 09:26:30 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,8 @@ typedef struct s_game{
 //Map and structure initializers
 int		get_map_struct(int argc, char **argv, t_game *game, int numb_lines);
 int		check_repetition(t_game *game, char **mat);
-void	get_map(char **map, char *aux);
+// int		get_map(t_game *game);
+void	get_map(char **map_line, char *aux);
 int		map_validation(int argc, t_game *game, char *address);
 int		check_map_struct(t_game *game, int line, int column);
 int		check_wall(t_game *game, int line, int column);
