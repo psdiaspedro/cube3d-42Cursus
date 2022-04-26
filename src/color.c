@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:38:12 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/16 22:33:39 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/26 11:03:11 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	get_rgb(char *rgb)
 	if (!aux[0] || !aux[1] || !aux[2] || ft_strlen(aux[0]) != 3 || comma != 2)
 	{
 		free_matrix(aux);
-		return (0);
+		return (FALSE);
 	}
 	color = create_rgb(ft_atoi(aux[0]), ft_atoi(aux[1]), ft_atoi(aux[2]));
 	free_matrix(aux);

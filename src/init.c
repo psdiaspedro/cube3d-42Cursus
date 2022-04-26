@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:06:03 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/16 17:35:15 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/26 11:04:22 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	open_xpm_file(t_game *game, t_data *data, char *filename)
 	}
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
 	&data->line_length, &data->endian);
-	return (0);
+	return (FALSE);
 }
 
 int	init_images(t_game *game)
@@ -80,5 +80,5 @@ int	init_images(t_game *game)
 	open_xpm_file(game, &game->img.so, game->img.so.path);
 	open_xpm_file(game, &game->img.we, game->img.we.path);
 	open_xpm_file(game, &game->img.ea, game->img.ea.path);
-	return (1);
+	return (TRUE);
 }

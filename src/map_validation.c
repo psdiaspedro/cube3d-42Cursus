@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 08:37:24 by paugusto          #+#    #+#             */
-/*   Updated: 2022/04/25 11:07:21 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/26 12:05:53 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int	check_map_struct(t_game *game, int line, int column)
 			&& game->map[line][column] != '1')
 			{
 				if (!check_wall(game, line, column))
-					return (0);
+					return (FALSE);
 			}
 			column++;
 		}
 		line++;
 	}
-	return (1);
+	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/26 09:26:30 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/26 11:01:03 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define MAP_HEIGHT			24
 # define FLOOR				'0'
 # define WALL				'1'
+# define FALSE				0
+# define TRUE				1
 
 typedef struct s_int_vec
 {
@@ -121,14 +123,15 @@ typedef struct s_game{
 	char		*aux;
 	char		*temp;
 	char		*map_line;
+	size_t		gnl_output;
 	t_data		canvas;
 }	t_game;
 
 //Map and structure initializers
 int		get_map_struct(int argc, char **argv, t_game *game, int numb_lines);
 int		check_repetition(t_game *game, char **mat);
-// int		get_map(t_game *game);
-void	get_map(char **map_line, char *aux);
+int		get_map(t_game *game);
+// void	get_map(char **map_line, char *aux);
 int		map_validation(int argc, t_game *game, char *address);
 int		check_map_struct(t_game *game, int line, int column);
 int		check_wall(t_game *game, int line, int column);
