@@ -6,57 +6,11 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 08:44:22 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/26 11:04:22 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/27 10:23:35 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-
-int	check_front(t_game *game, int line, int column)
-{
-	while (game->map[line][column])
-	{
-		if (game->map[line][column] == '1')
-		{
-			return (TRUE);
-		}
-		column++;
-	}
-	return (FALSE);
-}
-
-int	check_back(t_game *game, int line, int column)
-{
-	while (column >= 0)
-	{
-		if (game->map[line][column] == '1')
-			return (TRUE);
-		column--;
-	}
-	return (FALSE);
-}
-
-int	check_up(t_game *game, int line, int column)
-{
-	while (line >= 0)
-	{
-		if (game->map[line][column] == '1')
-			return (TRUE);
-		line--;
-	}
-	return (FALSE);
-}
-
-int	check_bottom(t_game *game, int line, int column)
-{
-	while (game->map[line])
-	{
-		if (game->map[line][column] == '1')
-			return (TRUE);
-		line++;
-	}
-	return (FALSE);
-}
 
 int	check_left_bottom_diagonal(t_game *game, int line, int column)
 {

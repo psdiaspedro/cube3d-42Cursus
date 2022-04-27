@@ -28,7 +28,8 @@ SRC_FILES =	main.c					\
 			player_direction.c		\
 			color.c					\
 			map_validation.c		\
-			map_validation_utils.c
+			map_validation_utils.c	\
+			get_map_struct_utils.c
 
 SRC_DIR	=	./src/
 SRC		=	$(addprefix $(SRC_DIR), $(SRC_FILES))

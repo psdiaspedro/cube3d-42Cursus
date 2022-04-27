@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/26 11:01:03 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/27 11:28:51 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define WALL				'1'
 # define FALSE				0
 # define TRUE				1
+# define CONTINUE			2
+# define BREAK				3
 
 typedef struct s_int_vec
 {
@@ -131,7 +133,8 @@ typedef struct s_game{
 int		get_map_struct(int argc, char **argv, t_game *game, int numb_lines);
 int		check_repetition(t_game *game, char **mat);
 int		get_map(t_game *game);
-// void	get_map(char **map_line, char *aux);
+int		matrix_length(char **mat);
+int		validate_char(char c, char *set);
 int		map_validation(int argc, t_game *game, char *address);
 int		check_map_struct(t_game *game, int line, int column);
 int		check_wall(t_game *game, int line, int column);
@@ -140,6 +143,19 @@ int		check_back(t_game *game, int line, int column);
 int		check_up(t_game *game, int line, int column);
 int		check_bottom(t_game *game, int line, int column);
 int		get_rgb(char *color);
+int		validate_char(char c, char *set);
+
+int		check_front(t_game *game, int line, int column);
+int		check_back(t_game *game, int line, int column);
+int		check_up(t_game *game, int line, int column);
+int		check_bottom(t_game *game, int line, int column);
+char	**fix_line(char *aux);
+int		check_index(char *mat);
+int		get_path(t_game *game, char *aux, int numb_lines);
+int		check_resource(t_game *game);
+int		validate_char(char c, char *set);
+int		get_map_aux(t_game *game);
+// int		get_map_struct_aux(t_game *game, int numb_lines);
 
 //Program initializers
 void	init_map(t_game *game);
