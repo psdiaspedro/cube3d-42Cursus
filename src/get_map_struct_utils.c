@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 10:36:23 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/27 10:37:17 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:44:40 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**fix_line(char *aux)
 		return (NULL);
 	i = 2;
 	lines = ft_split(aux, ' ');
-	if (lines[0] == "C" || lines[0] == "F")
+	if (lines[0][0] == 'C' || lines[0][0] == 'F')
 	{
 		while (lines[i] != NULL)
 		{

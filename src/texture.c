@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 21:08:53 by paugusto          #+#    #+#             */
-/*   Updated: 2022/04/11 21:35:48 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:43:00 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ t_data	*get_texture(t_game *game, t_vec *ray_dir, t_rays *rays)
 			return (&game->img.so);
 		if (rays->hit_side == 1 && ray_dir->y < 0)
 			return (&game->img.no);
-		return ((t_data *)0);
 	}
+	return ((t_data *)0);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:23:35 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/20 10:00:47 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:37:13 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	free_matrix(char **mat)
 	free(mat);
 }
 
-void	free_map_vars(char **map, char **aux, char **temp)
+void	free_map_vars(char **aux, char **temp)
 {
 	free(*temp);
 	free(*aux);

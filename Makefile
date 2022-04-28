@@ -1,7 +1,7 @@
 
 NAME		=	cub3D
 CC			=	gcc
-FLAGS		=	-g #-fsanitize=address# -Wall -Wextra -Werror
+FLAGS		=	-g  -Wall -Wextra -Werror #-fsanitize=address
 MLXFLAGS	=	-lmlx -lXext -lX11
 RM			=	rm -fr
 OBJECT_DIR	=	./objects/
@@ -29,7 +29,8 @@ SRC_FILES =	main.c					\
 			color.c					\
 			map_validation.c		\
 			map_validation_utils.c	\
-			get_map_struct_utils.c
+			get_map_struct_utils.c	\
+			get_map_struct_utils_2.c
 
 SRC_DIR	=	./src/
 SRC		=	$(addprefix $(SRC_DIR), $(SRC_FILES))

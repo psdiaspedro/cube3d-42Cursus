@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:32:16 by paugusto          #+#    #+#             */
-/*   Updated: 2022/04/11 21:41:11 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:41:16 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	player_walk_up_down(t_game *game)
 {
 	t_vec	velocity;
-	int		speed;
-
-	speed = 5;
+ 
 	velocity = game->player.dir;
 	if (game->buttons.up)
 		vec_scale(&velocity, 0.1f);

@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/27 11:28:51 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:37:43 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,8 @@ int		get_path(t_game *game, char *aux, int numb_lines);
 int		check_resource(t_game *game);
 int		validate_char(char c, char *set);
 int		get_map_aux(t_game *game);
-// int		get_map_struct_aux(t_game *game, int numb_lines);
+int		get_map_struct_aux_2(t_game *game, int ret, int numb_lines);
+int		get_map_struct_aux(t_game *game);
 
 //Program initializers
 void	init_map(t_game *game);
@@ -167,7 +168,7 @@ void	run(t_game *game);
 //Release and end the program
 void	free_all(t_game *game);
 void	free_matrix(char **mat);
-void	free_map_vars(char **map, char **aux, char **temp);
+void	free_map_vars(char **aux, char **temp);
 int		kill_window(t_game *game);
 
 //player player_movement

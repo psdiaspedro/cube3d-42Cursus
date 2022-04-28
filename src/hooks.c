@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 10:38:53 by paugusto          #+#    #+#             */
-/*   Updated: 2022/04/13 10:41:27 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:42:00 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	press_key(int key_code, t_game *game)
 		game->buttons.rotate_right = 1;
 	if (key_code == LEFT_ARROW)
 		game->buttons.rotate_left = 1;
+	return (0);
 }
 
 int	release_key(int key_code, t_game *game)
@@ -53,4 +54,5 @@ int	release_key(int key_code, t_game *game)
 		game->buttons.rotate_right = 0;
 	if (key_code == LEFT_ARROW)
 		game->buttons.rotate_left = 0;
+	return (0);
 }
