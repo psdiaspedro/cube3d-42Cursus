@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 10:36:23 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/28 10:44:40 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/28 11:47:42 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ char	**fix_line(char *aux)
 		}
 	}
 	if (matrix_length(lines) > 2)
+	{
+		free_matrix(lines);
 		return (NULL);
+	}
 	return (lines);
 }
 

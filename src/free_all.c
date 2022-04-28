@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:23:35 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/28 10:37:13 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/28 11:17:23 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	free_map(t_game *game)
 	free(game->map);
 	free(game->map_line);
 	game->map = NULL;
+	game->map_line = NULL;
 }
 
 void	free_all(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 18:03:28 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/28 10:40:47 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/28 11:36:52 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ int	get_map_struct_aux(t_game *game)
 	{
 		if (!get_map(game))
 		{
+			free_map_vars(&game->aux, &game->temp);
 			ft_putendl_fd("Error\nInvalid resource :(", 2);
 			return (FALSE);
 		}
+		free(game->temp);
 		return (BREAK);
 	}
 	if (game->aux[0] == '\0')
@@ -34,7 +36,6 @@ int	get_map_struct_aux(t_game *game)
 
 int	get_map_struct_aux_2(t_game *game, int ret, int numb_lines)
 {
-	
 	while (game->gnl_output)
 	{
 		game->gnl_output = get_next_line(game->fd, &game->aux);
@@ -120,7 +121,10 @@ int	get_map(t_game *game)
 	while (game->map_line[i])
 	{
 		if (!validate_char(game->map_line[i], "01 \nWESN"))
+		{
+			free(game->map_line);
 			return (FALSE);
+		}
 		i++;
 	}
 	game->map = ft_split(game->map_line, '\n');
