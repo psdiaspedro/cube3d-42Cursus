@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:38:12 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/26 11:03:11 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/05/02 11:43:05 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,21 @@ int	create_rgb(int r, int g, int b)
 int	get_rgb(char *rgb)
 {
 	char	**aux;
+	char	*temp;
 	int		color;
 	int		i;
-	int		comma;
 
 	aux = ft_split(rgb, ',');
 	i = 0;
-	comma = 0;
-	while (rgb[i])
+	while (aux[i])
 	{
-		if (!ft_isdigit(rgb[i]))
-			comma++;
+		temp = ft_strtrim(aux[i], " ");
+		free(aux[i]);
+		aux[i] = ft_strdup(temp);
+		free(temp);
 		i++;
 	}
-	if (!aux[0] || !aux[1] || !aux[2] || ft_strlen(aux[0]) != 3 || comma != 2)
+	if (!aux[0] || !aux[1] || !aux[2] || ft_strlen(aux[0]) != 3)
 	{
 		free_matrix(aux);
 		return (FALSE);

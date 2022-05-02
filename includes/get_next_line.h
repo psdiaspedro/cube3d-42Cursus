@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 17:29:00 by dalves-s          #+#    #+#             */
-/*   Updated: 2021/09/04 17:10:10 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/05/02 12:05:03 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 
-# define BUFFER_SIZE 1024
+# define BUFFER_SIZE 1
 
 size_t	gft_strlen(char *s);
 void	*gft_calloc(size_t nmemb, size_t size);

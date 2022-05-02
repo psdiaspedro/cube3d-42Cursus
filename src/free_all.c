@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:23:35 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/28 11:17:23 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/04/29 11:24:13 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	free_map(t_game *game)
 	int	i;
 
 	i = 0;
+	free_map_vars(&game->aux, &game->temp);
 	if (!game->map)
 		return ;
 	while (game->map[i])
@@ -75,6 +76,10 @@ void	free_matrix(char **mat)
 
 void	free_map_vars(char **aux, char **temp)
 {
-	free(*temp);
-	free(*aux);
+	if (*temp)
+		free(*temp);
+	*temp = NULL;
+	if (*aux)
+		free(*aux);
+	*aux = NULL;
 }

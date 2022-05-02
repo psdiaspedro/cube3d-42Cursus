@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 18:03:28 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/28 11:36:52 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/05/02 11:46:11 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	get_map_struct_aux(t_game *game)
 			ft_putendl_fd("Error\nInvalid resource :(", 2);
 			return (FALSE);
 		}
-		free(game->temp);
+		free_map_vars(&game->aux, &game->temp);
 		return (BREAK);
 	}
 	if (game->aux[0] == '\0')
@@ -46,16 +46,16 @@ int	get_map_struct_aux_2(t_game *game, int ret, int numb_lines)
 		else if (ret == BREAK)
 			break ;
 		else if (ret == CONTINUE)
-			continue ;
-		numb_lines = get_path(game, game->aux, numb_lines + 1);
-		free_map_vars(&game->aux, &game->temp);
-		if (!numb_lines)
 		{
-			ft_putendl_fd("Error\nInvalid resource :(", 2);
-			return (FALSE);
+			free_map_vars(&game->aux, &game->temp);
+			continue ;
 		}
+		if (!get_path(game, game->aux, numb_lines + 1))
+			return (FALSE);
+		free_map_vars(&game->aux, &game->temp);
 	}
-	return (TRUE);
+	free_map_vars(&game->aux, &game->temp);
+	return(TRUE);
 }
 
 int	get_map_struct(int argc, char **argv, t_game *game, int numb_lines)
@@ -68,13 +68,14 @@ int	get_map_struct(int argc, char **argv, t_game *game, int numb_lines)
 	game->gnl_output = 1;
 	if (!get_map_struct_aux_2(game, ret, numb_lines))
 	{
-		free_all(game);
+		free_map_vars(&game->aux, &game->temp);
+		ft_putendl_fd("Error\nInvalid resource :(", 2);
 		return (FALSE);
 	}
+	free_map_vars(&game->aux, &game->temp);
 	if (!check_resource(game))
 	{
 		ft_putendl_fd("Error\nInvalid resource :(", 2);
-		free_all(game);
 		return (FALSE);
 	}
 	return (TRUE);
@@ -92,6 +93,7 @@ int	get_map_aux(t_game *game)
 		{
 			free_matrix(checker);
 			checker = NULL;
+			free_map_vars(&game->aux, &game->temp);
 			return (FALSE);
 		}
 		free_matrix(checker);
@@ -101,7 +103,7 @@ int	get_map_aux(t_game *game)
 			game->map_line = ft_strjoin(game->map_line, game->aux);
 			game->map_line = ft_strjoin(game->map_line, "\n");
 		}
-		free(game->aux);
+		free_map_vars(&game->aux, &game->temp);
 		game->gnl_output = get_next_line(game->fd, &game->aux);
 	}
 	return (TRUE);
@@ -130,6 +132,5 @@ int	get_map(t_game *game)
 	game->map = ft_split(game->map_line, '\n');
 	if (!game->map)
 		return (FALSE);
-	free(game->aux);
 	return (TRUE);
 }

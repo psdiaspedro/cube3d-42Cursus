@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/28 10:37:43 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/05/02 10:33:37 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,9 @@ int		validate_char(char c, char *set);
 int		get_map_aux(t_game *game);
 int		get_map_struct_aux_2(t_game *game, int ret, int numb_lines);
 int		get_map_struct_aux(t_game *game);
+void	change_char(char *aux, char c1, char c2, int jump);
+int		check_comma_aux(char *line, int i);
+int		check_comma(char *line);
 
 //Program initializers
 void	init_map(t_game *game);

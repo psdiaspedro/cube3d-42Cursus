@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:05:54 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/04/26 12:34:26 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/05/02 11:42:29 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ int	main(int argc, char **argv)
 
 	ft_bzero(&game, sizeof(t_game));
 	if (!get_map_struct(argc, argv, &game, 0))
+	{
+		free_all(&game);
 		return (TRUE);
+	}
 	if (!check_map_struct(&game, 0, 0))
 	{
 		ft_putendl_fd("Error\nMap must be surrounded by walls! :(", 2);
