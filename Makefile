@@ -29,7 +29,8 @@ SRC_FILES =	main.c					\
 			map_validation.c		\
 			map_validation_utils.c	\
 			get_map_struct_utils.c	\
-			get_map_struct_utils_2.c
+			get_map_struct_utils_2.c \
+			get_next_line.c
 
 SRC_DIR	=	./src/
 SRC		=	$(addprefix $(SRC_DIR), $(SRC_FILES))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/05/02 10:33:37 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/05/03 19:09:17 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@
 # define TRUE				1
 # define CONTINUE			2
 # define BREAK				3
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 256
+# endif
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 128
+# endif
 
 typedef struct s_int_vec
 {
@@ -218,5 +226,7 @@ void	west(t_game *game, int x, int y);
 //map
 int		check_map_struct(t_game *game, int line, int column);
 int		check_wall(t_game *game, int line, int column);
+char	*ft_get_next_line(int fd);
+
 
 #endif
