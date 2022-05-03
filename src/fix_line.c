@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fix_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:10:19 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/05/02 11:41:00 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/05/03 20:34:38 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,9 @@ void	change_char(char *aux, char c1, char c2, int jump)
 	while (aux[i])
 	{
 		if (aux[i] == c1 && first == 0)
-		{
 			aux[i] = c2;
-		}
 		else if (aux[i] == c1)
-		{
 			first = 0;
-		}
 		i++;
 	}
 }
@@ -70,7 +66,7 @@ int	check_comma(char *line)
 
 	i = 0;
 	j = 0;
-    counter = 0;
+	counter = 0;
 	if (!line)
 		return (FALSE);
 	while (line[i])
@@ -82,10 +78,8 @@ int	check_comma(char *line)
 			i++;
 			continue ;
 		}
-		if (counter > 2 || (line[i] != ',' && !ft_isdigit(line[i])))
-        {
+		if (counter > 2 || (line[i] != '\n' && line[i] != ',' && !ft_isdigit(line[i])))
 			return (FALSE);
-        }
 		i++;
 	}
 	return (TRUE);

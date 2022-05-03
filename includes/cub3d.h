@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/05/03 19:09:17 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/05/03 19:45:12 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,15 @@ typedef struct s_game{
 	size_t		gnl_output;
 	t_data		canvas;
 }	t_game;
+
+
+typedef struct s_buffer
+{
+	int				fd;
+	char			data[BUFFER_SIZE + 1];
+	int				desloc;
+	char			*line;
+}	t_buffer;
 
 //Map and structure initializers
 int		get_map_struct(int argc, char **argv, t_game *game, int numb_lines);

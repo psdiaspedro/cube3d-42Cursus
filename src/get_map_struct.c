@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 18:03:28 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/05/03 10:56:31 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/05/03 19:50:38 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ int	get_map_struct_aux_2(t_game *game, int ret, int numb_lines)
 			continue ;
 		}
 		if (!get_path(game, game->aux, numb_lines + 1))
+		{
+			printf("2\n");
 			return (FALSE);
+		}
 		free_map_vars(&game->aux, &game->temp);
 		game->aux = ft_get_next_line(game->fd);
 	}
@@ -77,6 +80,7 @@ int	get_map_struct(int argc, char **argv, t_game *game, int numb_lines)
 	if (!check_resource(game))
 	{
 		ft_putendl_fd("Error\nInvalid resource :(", 2);
+		printf("3\n");
 		return (FALSE);
 	}
 	return (TRUE);
