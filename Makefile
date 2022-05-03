@@ -14,8 +14,6 @@ SRC_FILES =	main.c					\
 			init.c					\
 			run.c					\
 			get_map_struct.c		\
-			get_next_line.c			\
-			get_next_line_utils.c	\
 			free_all.c				\
 			player_movement.c		\
 			vectors.c				\
@@ -51,7 +49,7 @@ $(LIBFT):
 		$(MAKE) -C $(LIBFT_DIR)
 
 val:
-	valgrind -s --leak-check=full --show-leak-kinds=all ./cub3D maps/invalid_RGB_000.cub
+	valgrind -s --leak-check=full --show-leak-kinds=all ./cub3D maps/map.cub
 
 clean:
 	$(RM) $(OBJECT_DIR)

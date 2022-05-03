@@ -17,6 +17,10 @@
 # include <unistd.h>
 # include <limits.h>
 
+
+#define BUFFER_SIZE 128
+#define OPEN_MAX 256
+
 typedef struct s_list
 {
 	void			*content;

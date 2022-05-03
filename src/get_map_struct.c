@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_struct.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 18:03:28 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/05/02 11:46:11 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/05/03 10:56:31 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-#include "get_next_line.h"
+#include "../includes/libft.h"
 
 int	get_map_struct_aux(t_game *game)
 {
@@ -36,9 +36,9 @@ int	get_map_struct_aux(t_game *game)
 
 int	get_map_struct_aux_2(t_game *game, int ret, int numb_lines)
 {
-	while (game->gnl_output)
+	game->aux = ft_get_next_line(game->fd);
+	while (game->aux)
 	{
-		game->gnl_output = get_next_line(game->fd, &game->aux);
 		game->temp = ft_strtrim(game->aux, " ");
 		ret = get_map_struct_aux(game);
 		if (ret == FALSE)
@@ -53,6 +53,7 @@ int	get_map_struct_aux_2(t_game *game, int ret, int numb_lines)
 		if (!get_path(game, game->aux, numb_lines + 1))
 			return (FALSE);
 		free_map_vars(&game->aux, &game->temp);
+		game->aux = ft_get_next_line(game->fd);
 	}
 	free_map_vars(&game->aux, &game->temp);
 	return(TRUE);
@@ -85,7 +86,7 @@ int	get_map_aux(t_game *game)
 {
 	char	**checker;
 
-	while (game->gnl_output)
+	while (game->aux)
 	{
 		checker = ft_split(game->map_line, '\n');
 		if (!*game->aux
@@ -104,7 +105,7 @@ int	get_map_aux(t_game *game)
 			game->map_line = ft_strjoin(game->map_line, "\n");
 		}
 		free_map_vars(&game->aux, &game->temp);
-		game->gnl_output = get_next_line(game->fd, &game->aux);
+		game->aux = ft_get_next_line(game->fd);
 	}
 	return (TRUE);
 }
