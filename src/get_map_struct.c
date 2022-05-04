@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_struct.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 18:03:28 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/05/03 19:50:38 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/05/03 22:12:21 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-#include "../includes/libft.h"
+#include "get_next_line.h"
 
 int	get_map_struct_aux(t_game *game)
 {
@@ -20,7 +20,6 @@ int	get_map_struct_aux(t_game *game)
 		if (!get_map(game))
 		{
 			free_map_vars(&game->aux, &game->temp);
-			ft_putendl_fd("Error\nInvalid resource :(", 2);
 			return (FALSE);
 		}
 		free_map_vars(&game->aux, &game->temp);
@@ -36,13 +35,21 @@ int	get_map_struct_aux(t_game *game)
 
 int	get_map_struct_aux_2(t_game *game, int ret, int numb_lines)
 {
-	game->aux = ft_get_next_line(game->fd);
-	while (game->aux)
+	game->map_path = TRUE;
+	while (game->gnl_output)
 	{
+		game->gnl_output = get_next_line(game->fd, &game->aux);
 		game->temp = ft_strtrim(game->aux, " ");
 		ret = get_map_struct_aux(game);
 		if (ret == FALSE)
+		{
+			while (game->gnl_output)
+			{
+				game->gnl_output = get_next_line(game->fd, &game->aux);
+				free_map_vars(&game->aux, &game->temp);
+			}
 			return (FALSE);
+		}
 		else if (ret == BREAK)
 			break ;
 		else if (ret == CONTINUE)
@@ -50,15 +57,12 @@ int	get_map_struct_aux_2(t_game *game, int ret, int numb_lines)
 			free_map_vars(&game->aux, &game->temp);
 			continue ;
 		}
-		if (!get_path(game, game->aux, numb_lines + 1))
-		{
-			printf("2\n");
-			return (FALSE);
-		}
+		game->map_path = get_path(game, game->aux, numb_lines + 1);
 		free_map_vars(&game->aux, &game->temp);
-		game->aux = ft_get_next_line(game->fd);
 	}
 	free_map_vars(&game->aux, &game->temp);
+	if (!game->map_path)
+		return (FALSE);
 	return(TRUE);
 }
 
@@ -80,7 +84,6 @@ int	get_map_struct(int argc, char **argv, t_game *game, int numb_lines)
 	if (!check_resource(game))
 	{
 		ft_putendl_fd("Error\nInvalid resource :(", 2);
-		printf("3\n");
 		return (FALSE);
 	}
 	return (TRUE);
@@ -90,7 +93,7 @@ int	get_map_aux(t_game *game)
 {
 	char	**checker;
 
-	while (game->aux)
+	while (game->gnl_output)
 	{
 		checker = ft_split(game->map_line, '\n');
 		if (!*game->aux
@@ -109,7 +112,7 @@ int	get_map_aux(t_game *game)
 			game->map_line = ft_strjoin(game->map_line, "\n");
 		}
 		free_map_vars(&game->aux, &game->temp);
-		game->aux = ft_get_next_line(game->fd);
+		game->gnl_output = get_next_line(game->fd, &game->aux);
 	}
 	return (TRUE);
 }
@@ -122,7 +125,10 @@ int	get_map(t_game *game)
 	game->map_line = ft_strdup("");
 	i = 0;
 	if (!get_map_aux(game))
+	{
+		free(game->map_line);
 		return (FALSE);
+	}
 	game->map_line = ft_strjoin(game->map_line, game->aux);
 	game->map_line = ft_strjoin(game->map_line, "\n");
 	while (game->map_line[i])

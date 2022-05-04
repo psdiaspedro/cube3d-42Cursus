@@ -1,98 +1,129 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/18 09:18:37 by paugusto          #+#    #+#             */
-/*   Updated: 2021/08/20 14:10:06 by paugusto         ###   ########.fr       */
+/*   Created: 2021/06/16 17:28:13 by dalves-s          #+#    #+#             */
+/*   Updated: 2022/05/02 11:58:14 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "get_next_line.h"
 
-size_t	get_line_size(char *data)
+int	gline_break(char *line_buf, size_t len)
 {
-	size_t	size;
+	size_t	i;
 
-	size = 0;
-	while (data[size] && data[size] != '\n')
-		size++;
-	if (data[size] == '\n')
-		size++;
-	return (size);
+	i = 0;
+	if (!line_buf)
+		return (i);
+	while (i < len)
+	{
+		if (line_buf[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
-int	append_line(char *line, char *data)
+void	*gft_calloc(size_t nmemb, size_t size)
 {
-	int	index;
-	int	sub_index;
+	void	*point;
+	char	*set;
+	size_t	i;
 
-	sub_index = 0;
-	index = 0;
-	while (line[index])
-		index++;
-	while (data[sub_index])
+	i = 0;
+	point = malloc(nmemb * size);
+	if (!point)
+		return (NULL);
+	set = (char *)point;
+	while (i < size)
 	{
-		line[index + sub_index] = data[sub_index];
-		if (data[sub_index] == '\n')
-			return (sub_index + 1);
-		sub_index++;
+		set[i] = 0;
+		i++;
 	}
-	return (-1);
+	return (point);
 }
 
-void	get_line(t_buffer *buffer)
+char	*gnew_line(char **line, char *line_buf, int bytes)
 {
-	size_t	size;
-	char	*tmp;
-	int		desloc;
+	int		i;
+	char	*aux;
+	int		len;
 
-	desloc = buffer->desloc;
-	size = get_line_size(&buffer->data[desloc]);
-	if (buffer->line)
-		size += get_line_size(buffer->line);
-	tmp = (char *) ft_calloc(size + 1, sizeof(char));
-	if (buffer->line)
+	len = 0;
+	i = 0;
+	aux = NULL;
+	while ((line_buf)[i] != '\n' && (line_buf)[i] != '\0')
+		i++;
+	*line = gft_substr((line_buf), 0, i);
+	if (bytes)
 	{
-		append_line(tmp, buffer->line);
-		free(buffer->line);
+		if ((line_buf)[i] == '\n')
+			i++;
+		len = gft_strlen((char *)((line_buf) + i));
+		aux = gft_substr((line_buf), i, len);
+		if (!aux)
+		{	
+			free(line_buf);
+			return (NULL);
+		}
 	}
-	desloc = append_line(tmp, &buffer->data[desloc]);
-	buffer->line = tmp;
-	if (desloc == -1)
+	free(line_buf);
+	if (!*line)
 	{
-		ft_bzero(buffer->data, BUFFER_SIZE);
-		buffer->desloc = 0;
-		if ((read(buffer->fd, buffer->data, BUFFER_SIZE)) > 0)
-			get_line(buffer);
+		free(aux);
+		return (NULL);
 	}
-	else
-		buffer->desloc += desloc;
+	return (aux);
 }
 
-char	*ft_get_next_line(int fd)
+char	gsplit_line(int fd, char **line_buf, char **buf, int *bytes)
 {
-	static t_buffer	list[255];
-	t_buffer		*buffer;
+	char	*temp;
 
-	if (fd < 0 || fd > 255)
-		return (0);
-	buffer = &list[fd];
-	buffer->fd = fd;
-	buffer->line = 0;
-	if (*buffer->data == 0)
+	while (*bytes && !(gline_break(*line_buf, gft_strlen(*line_buf))))
 	{
-		if ((read(fd, buffer->data, BUFFER_SIZE)) <= 0)
+		*bytes = read(fd, *buf, BUFFER_SIZE);
+		(*buf)[*bytes] = 0;
+		if (*bytes < 0 || *bytes > BUFFER_SIZE)
+		{
+			free(*buf);
 			return (0);
+		}
+		temp = *line_buf;
+		*line_buf = gft_strjoin(temp, *buf);
+		free(temp);
 	}
-	get_line(buffer);
-	if (*buffer->line == 0)
+	free(*buf);
+	return (1);
+}
+
+int	get_next_line(int fd, char **line)
+{
+	static char	*line_buf;
+	char		*buf;
+	int			bytes;
+	int			check;
+
+	bytes = BUFFER_SIZE;
+	if ((fd < 0) || !line || (BUFFER_SIZE <= 0) || fd > RLIMIT_NOFILE)
+		return (-1);
+	if (!line_buf)
+		line_buf = gft_strdup("");
+	buf = gft_calloc(sizeof(char), (BUFFER_SIZE + 1));
+	if (!buf)
+		return (-1);
+	check = gsplit_line(fd, &line_buf, &buf, &bytes);
+	if (!check)
+		return (-1);
+	line_buf = gnew_line(line, line_buf, bytes);
+	if (!bytes)
 	{
-		free(buffer->line);
+		free(line_buf);
 		return (0);
 	}
-	return (buffer->line);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:38:12 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/05/02 11:43:05 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/05/04 10:04:42 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	get_rgb(char *rgb)
 		free(temp);
 		i++;
 	}
-	if (!aux[0] || !aux[1] || !aux[2] || ft_strlen(aux[0]) != 3)
+	if (!aux[0] || !aux[1] || !aux[2] || ft_strlen(aux[0]) > 3)
 	{
 		free_matrix(aux);
 		return (FALSE);

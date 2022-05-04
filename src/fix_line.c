@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fix_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:10:19 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/05/03 20:34:38 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/05/04 10:34:54 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,13 @@ void	change_char(char *aux, char c1, char c2, int jump)
 	while (aux[i])
 	{
 		if (aux[i] == c1 && first == 0)
+		{
 			aux[i] = c2;
+		}
 		else if (aux[i] == c1)
+		{
 			first = 0;
+		}
 		i++;
 	}
 }
@@ -61,12 +65,10 @@ int	check_comma_aux(char *line, int i)
 int	check_comma(char *line)
 {
 	int	i;
-	int	j;
 	int	counter;
 
 	i = 0;
-	j = 0;
-	counter = 0;
+    counter = 0;
 	if (!line)
 		return (FALSE);
 	while (line[i])
@@ -78,7 +80,7 @@ int	check_comma(char *line)
 			i++;
 			continue ;
 		}
-		if (counter > 2 || (line[i] != '\n' && line[i] != ',' && !ft_isdigit(line[i])))
+		if (counter > 2 || (line[i] != ',' && !ft_isdigit(line[i])))
 			return (FALSE);
 		i++;
 	}
@@ -88,11 +90,9 @@ int	check_comma(char *line)
 char	**fix_line(char *aux)
 {
 	char	**lines;
-	int		i;
 
 	if (aux[0] == ' ')
 		return (NULL);
-	i = 1;
 	if (aux[0] == 'C' || aux[0] == 'F')
 	{
 		change_char(aux, ' ', 1, TRUE);

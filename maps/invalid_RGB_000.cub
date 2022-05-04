@@ -2,7 +2,6 @@ EA ./imgs/ea_redbrick.xpm
 WE ./imgs/we_redbrick.xpm
 NO ./imgs/no_redbrick.xpm
 SO ./imgs/so_redbrick.xpm
-SO ./imgs/so_redbrick.xpm
 C 255,200,160
 F 122,122,122
 
@@ -19,6 +18,3 @@ F 122,122,122
 10000000000000001
 10000000000000001
 11111111111111111
-
-
-

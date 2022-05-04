@@ -1,7 +1,7 @@
 
 NAME		=	cub3D
 CC			=	gcc
-FLAGS		=	-g #-Wall -Wextra -Werror -fsanitize=address -static-libasan
+FLAGS		=	-g #-Wall -Wextra -Werror -fsanitize=address
 MLXFLAGS	=	-lmlx -lXext -lX11
 RM			=	rm -fr
 OBJECT_DIR	=	./objects/
@@ -14,6 +14,8 @@ SRC_FILES =	main.c					\
 			init.c					\
 			run.c					\
 			get_map_struct.c		\
+			get_next_line.c			\
+			get_next_line_utils.c	\
 			free_all.c				\
 			player_movement.c		\
 			vectors.c				\
@@ -29,8 +31,7 @@ SRC_FILES =	main.c					\
 			map_validation.c		\
 			map_validation_utils.c	\
 			get_map_struct_utils.c	\
-			get_map_struct_utils_2.c \
-			get_next_line.c
+			get_map_struct_utils_2.c
 
 SRC_DIR	=	./src/
 SRC		=	$(addprefix $(SRC_DIR), $(SRC_FILES))
@@ -50,7 +51,7 @@ $(LIBFT):
 		$(MAKE) -C $(LIBFT_DIR)
 
 val:
-	valgrind -s --leak-check=full --show-leak-kinds=all ./cub3D maps/map.cub
+	valgrind -s --leak-check=full --show-leak-kinds=all ./cub3D maps/invalid_RGB_000.cub
 
 clean:
 	$(RM) $(OBJECT_DIR)

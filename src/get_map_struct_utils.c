@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_struct_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 10:36:23 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/05/03 20:12:53 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/05/03 21:25:47 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ int	get_path(t_game *game, char *aux, int numb_lines)
 
 	mat = fix_line(aux);
 	if (!mat || !mat[1] || !check_index(mat[0])
-		|| !check_repetition(game, mat))
+		|| !check_repetition(game, mat) || !game->map_path)
 	{
+		free_map_vars(&game->aux, &game->temp);
 		free_matrix(mat);
 		return (FALSE);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/05/03 19:45:12 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/05/03 21:23:41 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,6 @@
 # define TRUE				1
 # define CONTINUE			2
 # define BREAK				3
-
-# ifndef OPEN_MAX
-#  define OPEN_MAX 256
-# endif
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 128
-# endif
 
 typedef struct s_int_vec
 {
@@ -130,21 +122,13 @@ typedef struct s_game{
 	char		*ceil_color;
 	int			ccolor;
 	int			fcolor;
+	int			map_path;
 	char		*aux;
 	char		*temp;
 	char		*map_line;
 	size_t		gnl_output;
 	t_data		canvas;
 }	t_game;
-
-
-typedef struct s_buffer
-{
-	int				fd;
-	char			data[BUFFER_SIZE + 1];
-	int				desloc;
-	char			*line;
-}	t_buffer;
 
 //Map and structure initializers
 int		get_map_struct(int argc, char **argv, t_game *game, int numb_lines);
@@ -235,7 +219,5 @@ void	west(t_game *game, int x, int y);
 //map
 int		check_map_struct(t_game *game, int line, int column);
 int		check_wall(t_game *game, int line, int column);
-char	*ft_get_next_line(int fd);
-
 
 #endif
