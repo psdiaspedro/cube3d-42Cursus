@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:10:19 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/05/04 10:34:54 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/05/04 10:54:03 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	change_char(char *aux, char c1, char c2, int jump)
 {
-	int first;
+	int	first;
 	int	i;
 
 	i = 0;
@@ -37,7 +37,7 @@ void	change_char(char *aux, char c1, char c2, int jump)
 
 int	check_comma_aux(char *line, int i)
 {
-	int j;
+	int	j;
 
 	j = i;
 	while (j)
@@ -68,7 +68,7 @@ int	check_comma(char *line)
 	int	counter;
 
 	i = 0;
-    counter = 0;
+	counter = 0;
 	if (!line)
 		return (FALSE);
 	while (line[i])

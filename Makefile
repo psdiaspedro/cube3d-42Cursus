@@ -1,7 +1,7 @@
 
 NAME		=	cub3D
 CC			=	gcc
-FLAGS		=	-g #-Wall -Wextra -Werror -fsanitize=address
+FLAGS		=	-g -Wall -Wextra -Werror
 MLXFLAGS	=	-lmlx -lXext -lX11
 RM			=	rm -fr
 OBJECT_DIR	=	./objects/

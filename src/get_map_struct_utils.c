@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 10:36:23 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/05/03 21:25:47 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/05/04 10:45:23 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	check_index(char *mat)
 	return (FALSE);
 }
 
-int	get_path(t_game *game, char *aux, int numb_lines)
+int	get_path(t_game *game, char *aux)
 {
 	char	**mat;
 

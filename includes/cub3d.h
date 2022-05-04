@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:02:57 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/05/03 21:23:41 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/05/04 10:48:39 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ typedef struct s_game{
 }	t_game;
 
 //Map and structure initializers
-int		get_map_struct(int argc, char **argv, t_game *game, int numb_lines);
+int		get_map_struct(int argc, char **argv, t_game *game);
 int		check_repetition(t_game *game, char **mat);
 int		get_map(t_game *game);
 int		matrix_length(char **mat);
@@ -152,11 +152,11 @@ int		check_up(t_game *game, int line, int column);
 int		check_bottom(t_game *game, int line, int column);
 char	**fix_line(char *aux);
 int		check_index(char *mat);
-int		get_path(t_game *game, char *aux, int numb_lines);
+int		get_path(t_game *game, char *aux);
 int		check_resource(t_game *game);
 int		validate_char(char c, char *set);
 int		get_map_aux(t_game *game);
-int		get_map_struct_aux_2(t_game *game, int ret, int numb_lines);
+int		get_map_struct_aux_2(t_game *game, int ret);
 int		get_map_struct_aux(t_game *game);
 void	change_char(char *aux, char c1, char c2, int jump);
 int		check_comma_aux(char *line, int i);

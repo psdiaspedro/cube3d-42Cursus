@@ -6,7 +6,7 @@
 /*   By: dalves-s <dalves-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 17:28:13 by dalves-s          #+#    #+#             */
-/*   Updated: 2022/05/02 11:58:14 by dalves-s         ###   ########.fr       */
+/*   Updated: 2022/05/04 11:03:44 by dalves-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,11 @@ char	*gnew_line(char **line, char *line_buf, int bytes)
 		len = gft_strlen((char *)((line_buf) + i));
 		aux = gft_substr((line_buf), i, len);
 		if (!aux)
-		{	
-			free(line_buf);
 			return (NULL);
-		}
 	}
 	free(line_buf);
 	if (!*line)
-	{
-		free(aux);
 		return (NULL);
-	}
 	return (aux);
 }
 
